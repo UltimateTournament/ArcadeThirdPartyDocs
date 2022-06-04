@@ -2,9 +2,23 @@
 sidebar_position: 1
 ---
 
-# Leaderboard
+# Leaderboard and Challenges
 
-Leaderboard games are the encouraged game to make on the arcade.
+Leaderboard and Challenge games are the encouraged game to make on the arcade.
+
+## Leaderboard games
+
+In Leaderboard games, players compete for a high score in a time-based leaderboard. The interval of the leaderboard ranges from days to hours, but is usually 24 hours.
+
+At the end of the leaderboard, the players with the top scores distribute the winning based on their place. For example, a leaderboard distribution might look like:
+
+| Place | Winnings |
+| ----------- | ----------- |
+| 1st | 70% |
+| 2nd | 20% |
+| 3rd | 10% |
+
+The winnings are distributed after taking the 10% commission. [Learn more about commission here.](/docs/commission)
 
 ## Advantages
 
@@ -17,7 +31,7 @@ Async Multiplayer games are the most successful on the arcade for the following 
 5. They result in far larger prize pools
 6. Very easy integration
 
-## Examples of Leaderboard Games
+## Game Examples
 
 #### Platformers and Racers
 

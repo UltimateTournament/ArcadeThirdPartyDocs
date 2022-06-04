@@ -6,4 +6,4 @@ sidebar_position: 10
 
 ### How do I see how many players are playing my game?
 
-Check the [Game Analytics section](/docs/game-analytics/developer-panel)
+Check the [Developer Panel Player Metrics page](/docs/developer-panel/player-metrics)
