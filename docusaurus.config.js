@@ -63,9 +63,12 @@ const config = {
           src: 'img/logo.svg',
         },
         items: [
+          // {
+          //   type: 'docsVersionDropdown',
+          // },
           {
             type: 'doc',
-            docId: 'getting_started',
+            docId: 'getting-started',
             position: 'left',
             label: 'Getting Started',
           },
@@ -85,7 +88,7 @@ const config = {
             items: [
               {
                 label: 'Getting Started',
-                to: '/docs/getting_started',
+                to: '/docs/getting-started',
               },
             ],
           },
