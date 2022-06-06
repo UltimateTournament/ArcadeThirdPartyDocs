@@ -4,44 +4,26 @@ sidebar_position: 1
 
 # Getting Started
 
-Let's discover **Docusaurus in less than 5 minutes**.
+Follow the steps below to get your game integrated to the Ultimate Arcade!
 
-## Getting Started
+## 1. Review Supported Game Types
 
-Get started by **creating a new site**.
+Figure out which category your game falls under in the [Supported Game Types](/docs/category/supported-game-types).
 
-Or **try Docusaurus immediately** with **[docusaurus.new](https://docusaurus.new)**.
+## 2. Integrate the Game and Server SDKs
 
-### What you'll need
+You will then need to begin integration with your game. Review the steps in [Beginning Integration](/docs/integration/beginning-integration) to get started, the follow the integration steps for your specific game category.
 
-- [Node.js](https://nodejs.org/en/download/) version 14 or above:
-  - When installing Node.js, you are recommended to check all checkboxes related to dependencies.
+## 3. Submit Your Game for Review
 
-## Generate a new site
+The Ultimate Arcade team will review a final version of your game to be put on the Arcade. We will check for:
 
-Generate a new Docusaurus site using the **classic template**.
+1. Proper integration
+2. Game mechanics, quality, and performance
+3. Bugs, abuse, and exploits
 
-The classic template will automatically be added to your project after you run the command:
+## 4. Launch!
 
-```bash
-npm init docusaurus@latest my-website classic
-```
+Your game will be launched on the Arcade!
 
-You can type this command into Command Prompt, Powershell, Terminal, or any other integrated terminal of your code editor.
-
-The command also installs all necessary dependencies you need to run Docusaurus.
-
-## Start your site
-
-Run the development server:
-
-```bash
-cd my-website
-npm run start
-```
-
-The `cd` command changes the directory you're working with. In order to work with your newly created Docusaurus site, you'll need to navigate the terminal there.
-
-The `npm run start` command builds your website locally and serves it through a development server, ready for you to view at http://localhost:3000/.
-
-Open `docs/getting-started.md` (this page) and edit some lines: the site **reloads automatically** and displays your changes.
+To celebrate, we'll hold a special tournament based on your game, and also send you some swag (location dependent).
