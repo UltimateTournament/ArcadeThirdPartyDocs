@@ -57,6 +57,44 @@ Initialization returns critical information to your game client such as the addr
 
 When the game server starts, it has a game client waiting for connection. When a connection is received, it must validate the connection against the SDK to ensure that the game session is for the inteded server. This also activates the game session and indicates to the Arcade that the game is now being played.
 
+<Tabs>
+<TabItem value="unity" label="Unity">
+
+```cs
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace CSharpTutorials
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string message = "Hello World!!";
+
+            Console.WriteLine(message);
+        }
+    }
+}
+```
+
+</TabItem>
+<TabItem value="js" label="JavaScript">
+
+```js
+const {PermissionPantherClient} = require('permissionpanther')
+const client = new PermissionPantherClient('<keyID>', '<keySecret>', {
+  endpoint: 'localhost:8080',
+  insecure: true
+})
+```
+
+</TabItem>
+</Tabs>
+
 Initialization will also return information about the player such as their display name.
 
 :::caution Attention
