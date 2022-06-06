@@ -9,11 +9,11 @@ import TabItem from '@theme/TabItem';
 
 All game types initialize their game clients and servers in the same way
 
-## Initialize the Game Client SDK
+## Initialize the Client SDK
 
 When the game client starts, it must initialize with the Arcade SDK. This will tell the game server that the client is loaded and ready to play, and tells the Arcade that the player has successfully started their game session.
 
-<Tabs>
+<Tabs groupId="sdk-lang">
 <TabItem value="unity" label="Unity">
 
 ```cs
@@ -53,11 +53,11 @@ const client = new PermissionPantherClient('<keyID>', '<keySecret>', {
 
 Initialization returns critical information to your game client such as the address for the game server, the auth token for connecting, and the display name for the player.
 
-## Initialize the Game Server SDK
+## Initialize the Server SDK
 
 When the game server starts, it has a game client waiting for connection. When a connection is received, it must validate the connection against the SDK to ensure that the game session is for the inteded server. This also activates the game session and indicates to the Arcade that the game is now being played.
 
-<Tabs>
+<Tabs groupId="sdk-lang">
 <TabItem value="unity" label="Unity">
 
 ```cs
@@ -82,7 +82,7 @@ namespace CSharpTutorials
 ```
 
 </TabItem>
-<TabItem value="js" label="JavaScript">
+<TabItem value="js" label="NodeJS">
 
 ```js
 const {PermissionPantherClient} = require('permissionpanther')
