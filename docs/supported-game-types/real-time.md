@@ -10,3 +10,5 @@ While real-time multiplayer games are possible ([like cyberworms](https://ultima
 
 1. Harder to develop a game server
 2. Latency sensitive
+
+Third Party support for real-time multiplayer games is not encouraged at this time, and is generally not supported with the exception of rare cases.

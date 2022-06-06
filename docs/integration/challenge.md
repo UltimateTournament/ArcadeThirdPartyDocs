@@ -1,0 +1,15 @@
+---
+sidebar_position: 2
+---
+
+# Challenge Game Integration
+
+## Recording and Replaying Player Input
+
+For Challenge games, half of the players will be creating a challenge, and half will be competing against a challenge. Chances are you will want to show the challenging player the play-through of the first player. For this, the SDK will return you the same input record that was given to the server when the first player played.
+
+You can use this recording to show the ghost of the other player in a platformer, split-screen tower defense round runs, or any other way you might want to show this recording.
+
+The only requirement is that this recording does not impact the gameplay of the challenging player.
+
+Likewise you may use the SDK to record the inputs of the player in a serializable format. The SDK will store these for the challenger.
