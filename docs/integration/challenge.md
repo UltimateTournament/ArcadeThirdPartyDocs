@@ -1,8 +1,13 @@
 ---
-sidebar_position: 2
+sidebar_position: 4
 ---
 
 # Challenge Game Integration
+
+## Initialization
+
+### Server Client Initialization
+
 
 ## Recording and Replaying Player Input
 

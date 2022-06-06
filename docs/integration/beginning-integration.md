@@ -10,6 +10,10 @@ All integrations require the following:
 
 In order to prevent cheating, a game server must be able to verify the state of the game.
 
+### Game Client Initialization on Start
+
+When the game client is loaded, it should start the game without additional required interaction from the player. At this time the slip has already been created, and the game server provisioned for this session. A countdown timer is acceptable, but should be synced with the server.
+
 ### Low Resource Requirements
 
 The game should not require lots of CPU or Memory to run. A good litmus test is that the game can run well on a mobile browser.
