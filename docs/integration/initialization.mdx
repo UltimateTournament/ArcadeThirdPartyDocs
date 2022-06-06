@@ -1,0 +1,111 @@
+---
+sidebar_position: 2
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Initialization
+
+All game types initialize their game clients and servers in the same way
+
+## Initialize the Client SDK
+
+When the game client starts, it must initialize with the Arcade SDK. This will tell the game server that the client is loaded and ready to play, and tells the Arcade that the player has successfully started their game session.
+
+<Tabs groupId="sdk-lang">
+<TabItem value="unity" label="Unity">
+
+```cs
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace CSharpTutorials
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string message = "Hello World!!";
+
+            Console.WriteLine(message);
+        }
+    }
+}
+```
+
+</TabItem>
+<TabItem value="js" label="JavaScript">
+
+```js
+const {PermissionPantherClient} = require('permissionpanther')
+const client = new PermissionPantherClient('<keyID>', '<keySecret>', {
+  endpoint: 'localhost:8080',
+  insecure: true
+})
+```
+
+</TabItem>
+</Tabs>
+
+Initialization returns critical information to your game client such as the address for the game server, the auth token for connecting, and the display name for the player.
+
+## Initialize the Server SDK
+
+When the game server starts, it has a game client waiting for connection. When a connection is received, it must validate the connection against the SDK to ensure that the game session is for the inteded server. This also activates the game session and indicates to the Arcade that the game is now being played.
+
+<Tabs groupId="sdk-lang">
+<TabItem value="unity" label="Unity">
+
+```cs
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace CSharpTutorials
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string message = "Hello World!!";
+
+            Console.WriteLine(message);
+        }
+    }
+}
+```
+
+</TabItem>
+<TabItem value="js" label="NodeJS">
+
+```js
+const {PermissionPantherClient} = require('permissionpanther')
+const client = new PermissionPantherClient('<keyID>', '<keySecret>', {
+  endpoint: 'localhost:8080',
+  insecure: true
+})
+```
+
+</TabItem>
+</Tabs>
+
+Initialization will also return information about the player such as their display name.
+
+:::caution Attention
+Both the game server and client must respect initialization errors.
+
+The Arcade SDK has built-in retry mechnisms, so if it returns an error or fails to initialize, the server and game client should exit.
+:::
+
+## Continue Integration For Your Game Type
+
+From here, integration depends on your game type. Follow the guides below:
+
+- [Leaderboard Games](/docs/integration/leaderboard)
+- [Challenge Games](/docs/integration/challenge)
