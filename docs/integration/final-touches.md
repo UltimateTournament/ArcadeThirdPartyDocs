@@ -35,7 +35,7 @@ We need a few images to make your game look super sweet on the Arcade. All provi
 
 ### Thumbnails
 
-This will be the image that is shown on the Arcade launcher tile at [ultimatearcade.io](ultimatearcade.io). This should be 808x672 pixels. This file should be named `thumbnail.png`
+This will be the image that is shown on the Arcade launcher tile at [ultimatearcade.io](https://ultimatearcade.io). This should be 808x672 pixels. This file should be named `thumbnail.png`
 
 A mobile-optimized thumbnail should also be provided that is 672x360 pixels. This file should be named `thumbnail_m.png`
 
