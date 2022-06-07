@@ -12,7 +12,11 @@ Leaderboard and Challenge games are the encouraged game to make on the arcade, a
 
 In Leaderboard games, players compete for a high score in a time-based leaderboard. The interval of the leaderboard ranges from days to hours, but is usually 24 hours.
 
-At the end of the leaderboard, the players with the top scores distribute the winning based on their place. For example, a leaderboard distribution might look like:
+When a player plays a game, they are given a score and that entry is placed on the Leaderboard. Each player can have at most one entry on the Leaderboard. If the player gets a better score, their entry is moved up. If they play again and get a lower score, their original higher score is kept.
+
+The position on the Leaderboard is determined by the score that a player is given. They can be at any scale: 0-100, 0-1,000, 0-1,000,000, up to you. We suggest using whole numbers under 10,000,000 for the best readability.
+
+At the end of the Leaderboard, the players with the top scores distribute the winning based on their place. For example, a Leaderboard distribution might look like:
 
 | Place | Winnings |
 | ----------- | ----------- |

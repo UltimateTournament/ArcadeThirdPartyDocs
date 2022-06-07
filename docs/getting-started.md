@@ -22,7 +22,11 @@ The Ultimate Arcade team will review a final version of your game to be put on t
 2. Game mechanics, quality, and performance
 3. Bugs, abuse, and exploits
 
-## 4. Launch!
+## 4. Add the Final Touches
+
+A few tiny details need to be taken care of before we can launch the game. See the [Final Touches](/docs/integration/final-touches) for more.
+
+## 5. Launch!
 
 Your game will be launched on the Arcade!
 

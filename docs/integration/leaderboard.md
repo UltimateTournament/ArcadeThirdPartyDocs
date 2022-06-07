@@ -4,6 +4,8 @@ sidebar_position: 4
 
 # Leaderboard Game Integration
 
+## Integration
+
 For Leaderboard and Challenge games, integration can be summarized to the following:
 
 1. The SDK will provide you with information about the player that is needed for displaying and communication (display name, SlipID, etc.)
