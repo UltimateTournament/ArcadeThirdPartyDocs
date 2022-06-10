@@ -4,6 +4,7 @@ sidebar_position: 5
 
 # Challenge Game Integration
 
+<!-- let's remove this section until we can actually provide this feature -->
 
 ## Recording and Replaying Player Input
 
