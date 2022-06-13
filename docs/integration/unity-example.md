@@ -83,7 +83,7 @@ You need to activate the player's session with the provided token with `Ultimate
 
 #### Check win situation on server only
 
-Make sure that the server is authoratative! We'll do this by having another `[Command]`, so the client can't just update the variable with which we count the shots fired.
+Make sure that the server is authoritative! We'll do this by having another `[Command]`, so the client can't just update the variable with which we count the shots fired.
 
 #### Report score and shutdown server
 
