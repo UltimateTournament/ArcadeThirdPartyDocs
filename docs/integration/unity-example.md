@@ -71,7 +71,7 @@ Ideally, you should only need very few changes to your game. They boil down to
 
 Every player of the same leaderboard should get the same level, enemy behavior etc, so if you are using randomness in your game, make sure to use the seed found in `AutoConnect.RandomSeed`.
 
-#### Get player token from client
+#### Get the player token from client
 
 The frontend needs to get the matchmaking token from the arcade and send it to the server.
 
