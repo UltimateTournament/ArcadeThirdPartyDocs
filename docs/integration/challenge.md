@@ -1,10 +1,10 @@
+<!-- 
 ---
 sidebar_position: 5
 ---
 
 # Challenge Game Integration
 
-<!-- let's remove this section until we can actually provide this feature -->
 
 ## Recording and Replaying Player Input
 
@@ -15,3 +15,4 @@ You can use this recording to show the ghost of the other player in a platformer
 The only requirement is that this recording does not impact the gameplay of the challenging player.
 
 Likewise you may use the SDK to record the inputs of the player in a serializable format. The SDK will store these for the challenger.
+-->

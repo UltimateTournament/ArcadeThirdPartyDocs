@@ -5,37 +5,43 @@ sidebar_position: 3
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-TODO
+# Adapting your game
 
-# Initialization
+You should only need to make very few changes to your games to make them work well with the Arcade.
 
-All game types initialize their game clients and servers in the same way
+Below we list the necessary changes and the SDK functions helping with them. In case you're using a language/framework that 
+we don't support yet, just reach out. All you need to create a new SDK (or work without one) is the ability to make a few HTTP calls.
 
-## Initialize the Client SDK
+:::caution Attention
+Both the game server and client must respect errors.
 
-When the game client starts, it must initialize with the Arcade SDK. This will tell the game server that the client is loaded and ready to play, and tells the Arcade that the player has successfully started their game session.
+The Arcade SDK has built-in retry mechanisms, so if it returns an error or fails to initialize, then is error is final and
+the server and game client should disconnect and exit.
+:::
 
-<Tabs groupId="sdk-lang">
+:::note Game State
+Currently the Arcade doesn't support long-running games and therefore no state persistence is provided.
+If you're currently using some persistence, just replace it with some in-memory implementation.
+:::
+
+## Use a fixed random seed
+
+Probably your game has some kind of randomness to it: Where and when enemies spawn, how the level layout is like, etc.
+Now if two players play your game, there is a chance that one player has a significantly easier time than another player.
+Outside of the Arcade this is fine as it will average out over many games. 
+But for a highly competitive gameplay with money at stake this must not happen.
+
+Every player of the same leaderboard/challenge should get the same level, enemy behavior etc. 
+To achieve this you must explicitly set the seed of your random number generator with a seed that we provide to you.
+
+<Tabs groupId="rnd-seed">
 <TabItem value="unity" label="Unity">
 
 ```cs
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CSharpTutorials
+private void AutoConnect_OnServerReady()
 {
-    class Program
-    {
-        static void Main(string[] args)
-        {
-            string message = "Hello World!!";
-
-            Console.WriteLine(message);
-        }
-    }
+    UnityEngine.Random.InitState(AutoConnect.RandomSeed.GetHashCode());
+    // and we should only allow players to join after we setup all randomness
 }
 ```
 
@@ -43,71 +49,184 @@ namespace CSharpTutorials
 <TabItem value="js" label="JavaScript">
 
 ```js
-const {PermissionPantherClient} = require('permissionpanther')
-const client = new PermissionPantherClient('<keyID>', '<keySecret>', {
-  endpoint: 'localhost:8080',
-  insecure: true
-})
+alert("TODO");
 ```
 
 </TabItem>
 </Tabs>
 
-Initialization returns critical information to your game client such as the address for the game server, the auth token for connecting, and the display name for the player.
+## Use our authentication
 
-## Initialize the Server SDK
+When a player choses to play your game on the Arcade, then we'll create a token (a secret string) that
+proves the player identity, the game they selected and that they had enough funds to join the game.
 
-When the game server starts, it has a game client waiting for connection. When a connection is received, it must validate the connection against the SDK to ensure that the game session is for the inteded server. This also activates the game session and indicates to the Arcade that the game is now being played.
+We pass this token into the iframe in which your game will start, so that you can pass it along to your game server.
+The server must use that token then to activate the player session - see next section.
 
-<Tabs groupId="sdk-lang">
+
+<Tabs groupId="get-token">
 <TabItem value="unity" label="Unity">
 
 ```cs
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CSharpTutorials
+private void Start()
 {
-    class Program
-    {
-        static void Main(string[] args)
-        {
-            string message = "Hello World!!";
-
-            Console.WriteLine(message);
-        }
-    }
+    var token = ExternalScriptBehavior.Token();
+    this.clientApi = new UltimateArcadeGameClientAPI(token, ExternalScriptBehavior.BaseApiServerName());
+    //TODO send token to server
 }
 ```
 
 </TabItem>
-<TabItem value="js" label="NodeJS">
+<TabItem value="js" label="JavaScript">
 
 ```js
-const {PermissionPantherClient} = require('permissionpanther')
-const client = new PermissionPantherClient('<keyID>', '<keySecret>', {
-  endpoint: 'localhost:8080',
-  insecure: true
-})
+alert("TODO");
 ```
 
 </TabItem>
 </Tabs>
 
-Initialization will also return information about the player such as their display name.
+## Activate the player session
 
-:::caution Attention
-Both the game server and client must respect initialization errors.
+You need to activate the player's session with the provided token to ensure the connection is legitimate
+and to retrieve information about the player, like their display name. If this fails you MUST disconnect them!
 
-The Arcade SDK has built-in retry mechnisms, so if it returns an error or fails to initialize, the server and game client should exit.
-:::
 
-## Continue Integration For Your Game Type
+<Tabs groupId="activate-session">
+<TabItem value="unity" label="Unity">
 
-From here, integration depends on your game type. Follow the guides below:
+```cs
+private UltimateArcadeGameServerAPI serverApi;
+[Command]
+private void InitPlayerCmd(string token)
+{
+    StartCoroutine(serverApi.ActivatePlayer(token,
+        pi => UADebug.Log("player joined: " + pi.DisplayName),
+        err => UADebug.Log("ERROR player join. TODO KICK PLAYER: " + err)));
+}
+```
 
-- [Leaderboard Games](/docs/integration/leaderboard)
-- [Challenge Games](/docs/integration/challenge)
+</TabItem>
+<TabItem value="js" label="JavaScript">
+
+```js
+alert("TODO");
+```
+
+</TabItem>
+</Tabs>
+
+## Check win situation on the server only
+
+Make sure that the server is authoritative, this means that because we can't prevent a player from manipulating their local client,
+all final decisions must happen on the server.
+
+To make the game appear smooth and lag free, you can use techniques like client-side prediction that let the player move locally,
+but the server might respond with a different decision and then the local client must rollback the last move.
+
+## Report win/loss
+
+This is basically the only place that differs between leaderboard games and real-time games. 
+
+### For leaderboard games
+
+<Tabs groupId="shutdown">
+<TabItem value="unity" label="Unity">
+
+```cs
+private void GameOver()
+{
+    StartCoroutine(
+        this.serverApi.ReportPlayerScore(this.playToken, playerScore,
+            () => UADebug.Log("done"), 
+            err => UADebug.Log("error:" + err) 
+        )
+    );
+}
+```
+
+</TabItem>
+<TabItem value="js" label="JavaScript">
+
+```js
+alert("TODO");
+```
+
+</TabItem>
+</Tabs>
+
+### For real-time games
+
+<Tabs groupId="shutdown">
+<TabItem value="unity" label="Unity">
+
+```cs
+private void GameOver()
+{
+    // player has left the game without losing
+    StartCoroutine(
+        this.serverApi.SettlePlayer(playerToken,
+            () => UADebug.Log("done"), 
+            err => UADebug.Log("error:" + err) 
+        )
+    );
+    // player has left lost against the game (e.g. ran into a wall)
+    StartCoroutine(
+        this.serverApi.SelfDefeatPlayer(playerToken,
+            () => UADebug.Log("done"), 
+            err => UADebug.Log("error:" + err) 
+        )
+    );
+    // player has left lost against another player
+    StartCoroutine(
+        this.serverApi.SelfDefeatPlayer(loserPlayerToken, winnerPlayerToken,
+            () => UADebug.Log("done"), 
+            err => UADebug.Log("error:" + err) 
+        )
+    );
+}
+```
+
+</TabItem>
+<TabItem value="js" label="JavaScript">
+
+```js
+alert("TODO");
+```
+
+</TabItem>
+</Tabs>
+
+## Shutdown the game after the session has ended
+
+When the session has finished the server informs the client about this via a game specific message. Then the server 
+and the client both can shutdown via their respective methods. 
+
+<Tabs groupId="shutdown">
+<TabItem value="unity" label="Unity">
+
+```cs
+private void Shutdown()
+{
+    // on the server
+    StartCoroutine(
+        this.serverApi.Shutdown(
+            () => UADebug.Log("Shutdown requested"), 
+            err => UADebug.Log("couldn't request shutdown:" + err) 
+        )
+    );
+    // on the client
+    ExternalScriptBehavior.CloseGame();
+}
+```
+
+</TabItem>
+<TabItem value="js" label="JavaScript">
+
+```js
+alert("TODO");
+```
+
+</TabItem>
+</Tabs>
+

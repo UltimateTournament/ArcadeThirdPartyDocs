@@ -12,7 +12,7 @@ Even if your game today runs purely in the browser, you will need to add a serve
 
 There are lots of frameworks helping you do this (e.g. Mirror for Unity) and we can support you, too.
 
-The team behind Mirror did a great writeup of [Server Authority Cheats & Anticheats](https://mirror-networking.gitbook.io/docs/faq/cheating).
+The team behind Mirror did a great writeup of [Server Authority: Cheats & Anticheats](https://mirror-networking.gitbook.io/docs/faq/cheating), if you want to know more.
 
 ## In-Memory game state
 
@@ -36,12 +36,9 @@ For any randomness that could appear in the game, it must be able to be controll
 
 The litmus test is that given the same seed, and the same user inputs, the exact gameplay simulation will occur every time. For example enemies will always spawn and attack in the exact same way, or a platformer will always generate the map in the same way.
 
-While it does not need to be exactly deterministic, it must be noticeably the same.
-
 ## Free to Play/Practice Mode
 
 All games should have a "free to play" or "practice" mode. This is where the player does not pay any tokens up front, but does not earn any tokens.
 
 <!-- TODO: Does this mean there will be no leaderboard for these practice plays? -->
 
-For Leaderboard games, a server is not needed, and the game can run entirely locally without needing to report scores.
