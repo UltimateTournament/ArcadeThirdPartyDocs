@@ -8,14 +8,10 @@ To integrate with the Ultimate Arcade you need to deliver
 * the game client
   * a bundle of HTML, JS and assets that runs in the player's browser
 * the game server
-  * a binary (with any needed libraries and assets) that can run on a Linux server
+  * a version of your game (with any needed libraries and assets) that can run on a Linux server
 
-<!-- TODO replace with diagram -->
-Integrating with the Ultimate Arcade consists of 3 points of communication:
-
-1. Between game client and game server
-2. Between game server and Ultimate Arcade
-3. Between game client and Ultimate Arcade
+<!-- from https://www.figma.com/file/B6sVE243kTfq9dWLiysrpe/Arcade-Third-Party-Platform?node-id=0%3A1 -->
+![game and ua interactions sequence diagram](./img/high-level.png)
 
 When a game is started by a player, the following happens:
 
