@@ -2,9 +2,9 @@
 sidebar_position: 10
 ---
 
-<!-- https://googledocstomarkdown.com/ -->
-
 # Unity Example Game Integration
+
+<!-- https://googledocstomarkdown.com/ -->
 
 Next, we'll show you how to make a Unity game work with the Ultimate Arcade.
 
