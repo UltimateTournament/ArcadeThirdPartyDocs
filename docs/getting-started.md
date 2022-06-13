@@ -16,7 +16,7 @@ Figure out which category your game falls under in the [Supported Game Types](/d
 
 ## 2. Integrate the Game and Server SDKs
 
-Integrating with the arcade is as easy as adding a few API calls. Have a look at the [Integration Requirements](/docs/integration/integration-requirements) to get started, then follow the integration steps for your specific game category.
+Integrating with the arcade is as easy as adding a few API calls. Have a look at the [Integration Requirements](/docs/integration/integration-requirements) to get started, then follow the integration steps for your specific game type.
 
 ## 3. Submit Your Game for Review
 
