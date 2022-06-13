@@ -8,7 +8,7 @@ Getting your game onto the arcade and start making money with it is easy! Just f
 
 ## 0. Contact Us!
 
-Say hello [via mail](mailto:info@ultimatetournament.io) and tell us about your great game. We'll setup the neccessary paperwork and invite you to our developer Discord where you can support anytime.
+Say hello [via mail](mailto:info@ultimatetournament.io) and tell us about your great game. We'll setup the neccessary paperwork and invite you to our developer Discord where you can get support anytime.
 
 ## 1. Review Supported Game Types
 
