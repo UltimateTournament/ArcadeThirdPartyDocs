@@ -12,7 +12,7 @@ Say hello [via mail](mailto:info@ultimatetournament.io) and tell us about your g
 
 ## 1. Review Supported Game Types
 
-Figure out which category your game falls under in the [Supported Game Types](/docs/category/supported-game-types). Depending in the type you'll want to use a few different methods from our SDK.
+Figure out which category your game falls under in the [Supported Game Types](/docs/category/supported-game-types). Your game type determines how you will integrate our SDK.
 
 ## 2. Integrate the Game and Server SDKs
 
