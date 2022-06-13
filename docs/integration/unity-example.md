@@ -4,7 +4,12 @@ sidebar_position: 10
 
 # Unity Example Game Integration
 
-<!-- https://googledocstomarkdown.com/ -->
+<!-- 
+1. https://googledocstomarkdown.com/ 
+2. add alt text
+3. download imgs: grep googleuser unity-example.md | sed 's/!\[\(.*\)\](\(.*\))/-L -o img\/unity-\1.png \2/g' | xargs -n4 curl
+4. fix img paths: sed -i 's/!\[\(.*\)\](\(.*googleusercontent.*\))/![\1](.\/img\/unity-\1.png)/g' unity-example.md
+-->
 
 Next, we'll show you how to make a Unity game work with the Ultimate Arcade.
 
@@ -17,7 +22,7 @@ Another reason is that they bring a few nice examples and we don't want to focus
 ### Create a new game
 We're using Unity version 2021.3
 
-![](https://lh6.googleusercontent.com/gTqKQWtJT5vHvxZftwaDeVUiAawCU_f4-vkhDnUvCePTZ3Kfw3Mn5HLipTqV4o_KbNfmv-IJlxkc8cfyU5YMkrfUk98re3Ectkr-acxfDu4ZauCMJCY0SnPX1nWqx4VYafB8NZUBqISrzWTW8Q)
+![create-project](./img/unity-create-project.png)
 
 ### Install Mirror
 
@@ -25,11 +30,11 @@ First add it to your account from the [Unity Asset Store](https://assetstore.uni
 
 Next, import it into your project:
 
-![](https://lh3.googleusercontent.com/kaqux0aSfnXjBbCXMjP2SHcAxd-AbyOyc_2jKu63TOv9FFju0EhBa4-ffCNZq6HjSBiFBq9YS2G2F4t13P6ydiANErQx52R-NrF_PPCJBtzAjGpSJVu79gIDtzZLt5RxwjChC5hDHb5PeYzgQw)
+![import-mirror](./img/unity-import-mirror.png)
 
 When importing, remove all examples, but the "Tanks" example. We'll make it the easiest high-score game ever! You have 300 seconds to fire 5 shots. Whoever has the most time left after finishing this "challenge" gets the highest score! Exciting!
 
-![](https://lh6.googleusercontent.com/ycnloxch_R6jr5Bi5YqUF7aXPH3xnsHQUG-hUX1qlaY7FHeuUgWdfEa5ZM1Cp0NJRXNAYIvYNk-P7W8TAh7G53vrKEJ1W26dbNTEitrXi0MfjPw2MOyyNJk_HJ7v8IYmocHrhPt_M4ir1T5V8Q)
+![mirror-examples](./img/unity-mirror-examples.png)
 
 Now move the example to your root folder so you don’t get any namespace issues when we start modifying the code.
 
@@ -44,22 +49,22 @@ Now that all the external code is there, lets setup our project correctly.
 
 Open the scene, then go to the build settings and click "Add Open Scene" and remove the empty scene that Unity initially created.
 
-![](https://lh6.googleusercontent.com/LPx7iWQiwnNjPRNdkuGIlY-YUDYtRLHwLp2sotK_86rZcF_DiUTxgPuqAxrWvwvod_UIoKP8hYO--NIWIL-0OUn1I0wE039yzUAa6T1WNxkHw6MFejnu_PIOFeqlMeVkgr39zjbwYAsdrNRvpA)
+![set-scene](./img/unity-set-scene.png)
 
 ### Configuring the network
 
 The game will run on the web and browsers only support WebSockets, so go to the `Network Manager`, remove the `KCP Transport` and add a `Simple Web Transport` script.
 
 
-![](https://lh5.googleusercontent.com/BJ8CeuGsKpwQZbYWDS22Dz6_TvlBgVjnJnJkmUKfYq6_cpmT-Pq_SjC34pyrK7NbEz3PhuDc9nb-16M3aAZ-Q2nK6TNQ9tpKfaEPTxLFzNjN6JlVyEHBINJtSz2irKoMa6WuRdvLJKrIFpoRkA)
+![web-transport](./img/unity-web-transport.png)
 
 Ensure to update the `Transport` reference in the `Network Manager` as well:
 
-![](https://lh4.googleusercontent.com/3vyLJW0jJ-WQpUG4KKpcdAzkzXGIr53Agt9gOLmDLiQTDtik_gn6GgPdmKi5KiIcgrS2Y8tBCQYbF1TFEakddYqcLSyWFSw_yVuKz9hNLCN0OlwX3nTnM6in6Su-NsfI9Qwi1nLrCzt8wnQHHA)
+![transport-reference](./img/unity-transport-reference.png)
 
 We need to automatically connect but only after the SDK has finished its magic. Therefore disable its own auto-start:
 
-![](https://lh3.googleusercontent.com/9xnlQ9c_2BpvAGA9VLmVAJ7nwbhk3TAcBb56Fnndqp4GN_OdbYDD_rXGljnGebrVWeJTbePQfUOxMqC5c5qew9yoAwKT3Ynn9qG20JiP7AQMSNzLLrIGj91FHCtIrgVR7LAbrOYnSrT6-BNyKA)
+![auto-connect](./img/unity-auto-connect.png)
 
 And add the SDK's `Auto Connect` script as a new component to the `Network Manager`.
 
@@ -186,7 +191,7 @@ namespace Mirror.Examples.Tanks
 
 We require builds to be self-contained. The easiest way to achive that is to set `Project Settings -> Player Settings -> Scripting Backend` to `IL2CPP`:
 
-![](https://lh6.googleusercontent.com/K7_nTdgj41wcjRBJLALdwvR2O6cSHQDE0tV4HTwa8qyQpnA5txXa59KtDxSq-bFU_CiAwNV2xjPcZzjHicoDVjrgzYZIZOoytABuIASLRSyxgofQMK9dwedMD7YZWA_EnpdgVGihVJk2qHueaA)
+![scripting-backend](./img/unity-scripting-backend.png)
 
 Now you can export your game!
 
