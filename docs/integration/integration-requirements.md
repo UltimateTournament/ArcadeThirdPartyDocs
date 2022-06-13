@@ -16,7 +16,7 @@ The team behind Mirror did a great writeup of [Server Authority: Cheats & Antich
 
 ## In-Memory game state
 
-The Arcade (currently) doesn't support long running game sessions that live for longer than the lifetime of a server. Therefore we don't provide APIs for storing/loading state and you shouldn't try to store it on disk (that will be wiped). 
+The Arcade (currently) doesn't support long running game sessions that live for longer than the lifetime of a server. Therefore we don't provide APIs for storing/loading state and you shouldn't try to store it on disk (that will be wiped).
 
 Just keep all state in memory. We will make sure that everything gets cleaned up in case the server crashes mid-game.
 
@@ -25,6 +25,8 @@ Just keep all state in memory. We will make sure that everything gets cleaned up
 When a player selects your game on the Arcade, they want to start playing right away. Setting their display name, player skin, etc. is all handled in their UA profile.
 
 Therefore, when the game client is loaded, it should start the game without additional required interaction from the player. At this time the slip has already been created, and the game server provisioned for this session. A countdown timer is acceptable, but should be synced with the server.
+
+Whether you connect to a game server is dependent on the game mode, see [Free to Play/Practice Mode](#free-to-playpractice-mode)
 
 ## Low Resource Requirements
 
@@ -38,7 +40,4 @@ The litmus test is that given the same seed, and the same user inputs, the exact
 
 ## Free to Play/Practice Mode
 
-All games should have a "free to play" or "practice" mode. This is where the player does not pay any tokens up front, but does not earn any tokens.
-
-<!-- TODO: Does this mean there will be no leaderboard for these practice plays? -->
-
+All games should have a "free to play" or "practice" mode. This is where the player does not pay any tokens up front, but does not earn any tokens. In this case, the server host will be `""` (blank string) and you should not connect to a server, everything can run locally.
