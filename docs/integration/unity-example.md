@@ -77,7 +77,7 @@ The frontend needs to get the matchmaking token from the arcade and send it to t
 
 We can get it via `ExternalScriptBehavior.Token()` and send it to the server with a Mirror `[Command]`.
 
-#### Activate player session
+#### Activate the player session
 
 You need to activate the player's session with the provided token with `UltimateArcadeGameServerAPI.ActivatePlayer(...)`. This is neede to ensure the connection is legitimate and gives you information about the player, like their display name.
 
