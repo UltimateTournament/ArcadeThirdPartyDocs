@@ -89,7 +89,9 @@ Make sure that the server is authoritative! We'll do this by having another `[Co
 
 When the player has finished we call `UltimateArcadeGameServerAPI.ReportPlayerScore(...)` to report their score.
 
-ℹ️ This is basically the only place that differs between leaderboard games and real-time games. For those you'd call one of these methods: `SettlePlayer`, `DefeatPlayer` or `SelfDefeatPlayer`.
+:::note
+This is basically the only place that differs between leaderboard games and real-time games. For those you'd call one of these methods: `SettlePlayer`, `DefeatPlayer` or `SelfDefeatPlayer`.
+:::
 
 Now that the session has finished we tell the player that the game is over with a `[TargetRpc]` call, so the game client can use `ExternalScriptBehavior.CloseGame()` to close the iframe. After that, we tell the SDK to shutdown the server with `UltimateArcadeGameServerAPI.Shutdown(...)`.
 
