@@ -46,4 +46,4 @@ The general flow of a game looks like:
 4. The game server passes the matchmaking token to the SDK to verify the connection, and fetch player information
 5. The game is played
 6. The game server reports the final score to Ultimate Arcade
-7. The server is shuts down and tells the SDK to do the same
+7. The server is shut down and tells the SDK to do the same
