@@ -42,7 +42,7 @@ The general flow of a game looks like:
 
 1. Your server starts and you wait until the SDK tells it's ready
 2. You start the actual game and ensure to listen for client connections on the port indicated by the `PORT` env var
-3. The game client connects and passes the matchmaking token to  the server
+3. The game client connects and passes the matchmaking token to the server
 4. The game server passes the matchmaking token to the SDK to verify the connection, and fetch player information
 5. The game is played
 6. The game server reports the final score to Ultimate Arcade
