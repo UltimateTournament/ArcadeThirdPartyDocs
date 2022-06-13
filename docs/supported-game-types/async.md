@@ -54,7 +54,7 @@ The map is randomly generated from a seed that is the same for every player in t
 
 Players play against the same environment every time to try to get higher and higher scores. When the leaderboard ends, the players with the highest scores distribute the total leaderboard value based on their rankings.
 
-<!-- maybe we shouldn't show this section yet, as this isn't ready -->
+<!--
 
 ## Challenge games
 
@@ -71,3 +71,5 @@ In the event that players tie, they will be returned their initial buy-in with n
 ### Example Challenge Game: A Motorbike Racer
 
 The player is given a randomly generated bike course, and has to get to the end before the opponent. If the player is competing against another challenge, they see the ghost of the challenge creator racing in the background. Who ever gets to the end of the course first wins.
+
+-->
