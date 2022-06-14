@@ -97,9 +97,19 @@ const ArcadeClient = new ArcadeClientSDK();
 // token for the player
 
 // If "", wait until the client has fetched the token
-while (ArcadeClient.sessionToken == "") {
-    // sleep for 10ms so the CPU is not sent to 100%
+while (ArcadeClient.sessionToken === "") {
+    // sleep for 10ms without blocking the event loop
+    await new Promise((resolve) => {
+        setTimeout(() => {
+            resolve(null);
+        }, 10);
+    });
 }
+
+// Connect to the server
+const serverInfo = ArcadeClient.getSessionInfo();
+// Example using websocket
+const wsConn = new Websocket("wss://" + serverInfo.server_address);
 ```
 
 </TabItem>
