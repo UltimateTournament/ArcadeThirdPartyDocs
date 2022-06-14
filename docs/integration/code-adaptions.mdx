@@ -107,9 +107,16 @@ while (ArcadeClient.sessionToken === "") {
 }
 
 // Connect to the server
-const serverInfo = ArcadeClient.getSessionInfo();
-// Example using websocket
-const wsConn = new Websocket("wss://" + serverInfo.server_address);
+const { server_address } = ArcadeClient.getSessionInfo();
+
+if (server_address === "") {
+    // Free to play, no need to connect
+} else {
+    // Playing with money, connect to authoritative server
+    // Example using websocket
+    const wsConn = new Websocket("wss://" + server_address);
+}
+
 ```
 
 </TabItem>
