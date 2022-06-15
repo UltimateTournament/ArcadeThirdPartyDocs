@@ -5,7 +5,7 @@ sidebar_position: 3
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# Adapting your game
+# Adapting Your Game
 
 You should only need to make very few changes to your games to make them work well with the Arcade.
 
@@ -58,8 +58,29 @@ const Server = new ArcadeServerSDK();
 
 // ... initialization
 
-const status = await Server.getServerStatus();
-myrng = new Math.seedrandom(status.random_seed);
+let myrng;
+
+// Retry loop
+const maxRetries = 5;
+for (let i = 0; i < maxRetries; i++) {
+    try {
+        const status = await Server.getServerStatus();
+        myrng = new Math.seedrandom(status.random_seed);
+        break; // exit the retry loop
+    } catch (err) {
+        console.error("error getting server status: ", err)
+        await new Promise((resolve) => {
+            setTimeout(() => {
+                resolve(null);
+            }, 100 * i);
+        });
+    }
+}
+
+if (!myrng) {
+    // Shutdown
+}
+
 // and we should only allow players to join after we setup all randomness
 ```
 
