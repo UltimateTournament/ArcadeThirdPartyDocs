@@ -58,7 +58,7 @@ const Server = new ArcadeServerSDK();
 
 // ... initialization
 
-const status = Server.getServerStatus();
+const status = await Server.getServerStatus();
 myrng = new Math.seedrandom(status.random_seed);
 // and we should only allow players to join after we setup all randomness
 ```
