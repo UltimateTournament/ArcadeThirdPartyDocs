@@ -24,6 +24,15 @@ Currently the Arcade doesn't support long-running games and therefore no state p
 If you're currently using some persistence, just replace it with some in-memory implementation.
 :::
 
+## Timeouts and Disconnects
+
+We require from our players that they play over a good and reliable internet connection but you still should allow them
+to reconnect within a reasonable amount of time. For something fast paced like CyberWorms this can be as little as 2 seconds,
+but for a slow moving logic game this could be up to 1-2 minutes.
+
+If someone doesn't reconnect after that time (or if your game is round-based and they just don't move for that time), you
+should make them lose (see below). It wouldn't be fair for the other player if someone could prevent losing by unplugging their network cable...
+
 ## Use a fixed random seed (server)
 
 Your game probably has some kind of randomness to it: Where and when enemies spawn, how the level layout is like, etc.
@@ -126,6 +135,8 @@ if (server_address === "") {
 
 You need to activate the player's session with the provided token to ensure the connection is legitimate
 and to retrieve information about the player, like their display name. If this fails you MUST disconnect them!
+
+This also ensure that even if player connections reach your server when they shouldn't, they shall not pass!
 
 
 <Tabs groupId="tabs">
