@@ -344,3 +344,33 @@ await ArcadeClient.gameOver();
 
 </TabItem>
 </Tabs>
+
+## Ensure your server reacts on process signals
+
+We control server startup and shutdown to ensure there is always a server available to play on. So, 
+please don't shutdown your server only because nobody has played in a while! We handle that.
+
+You must therefore honor the normal Linux signals for shutting down your game server. We'll terminate your
+server only in exceptional circumstances during a game, therefore you shouldn't try to compensate for that.
+
+<Tabs groupId="tabs">
+<TabItem value="unity" label="Unity">
+
+```cs
+// should work out of the box
+```
+
+</TabItem>
+<TabItem value="js" label="JavaScript">
+
+```js
+// especially if you're using a framework like fastify that intercepts SIGINT you should add 
+process.on("SIGINT", function () {
+    console.log("got interrupt signal. shutting down")
+    process.exit();
+});
+```
+
+</TabItem>
+</Tabs>
+

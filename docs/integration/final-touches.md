@@ -4,6 +4,29 @@ sidebar_position: 6
 
 # Final Touches
 
+When you're awesome game is finally ready to present to the world (and start earning money from it) we
+need the following to publish it to the Arcade:
+
+## Code and Binaries
+
+We'll review your code to ensure it's fair, uses the SDK correctly and so on, therefore we'll ask for your code.
+You'll keep all copyright and we will be handling it confidentially. We might drop this requirement when our
+AI is finally smart enough!
+
+And of course you need to deliver your game and its server:
+
+For the game itself (the frontend/client so to speak), you'll have to deliver a bundle (e.g. a ZIP) that contains
+an `index.html` file and all the assets (images, CSS, WASM, ...) that it references.
+
+For the game server, you'll have to provide us a bundle with your binaries and all files it needs at runtime. 
+Behind the scenes we're using Docker to run your game server on Linux servers. Therefore, when delivering your server to us,
+you must include a `Dockerfile` that defines how do run (and build, if you're not sending binaries) your game.
+
+:::note
+If you've never used Docker before, don't worry. For [Unity](https://github.com/UltimateTournament/ArcadeUnitySDK/blob/main/Dockerfile) and for [NodeJS](https://github.com/UltimateTournament/ArcadeNodeJSSDK/blob/main/Dockerfile) we've included example files
+that should work out of the box and for other platforms just contact us.
+:::
+
 ## Short Description
 
 You should write a 1-2 sentence description of the game to display on the landing page that players first see when they launch your game.
