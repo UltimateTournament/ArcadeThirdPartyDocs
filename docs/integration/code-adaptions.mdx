@@ -5,11 +5,11 @@ sidebar_position: 3
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# Adapting your game
+# Adapting Your Game
 
 You should only need to make very few changes to your games to make them work well with the Arcade.
 
-Below we list the necessary changes and the SDK functions helping with them. In case you're using a language/framework that 
+Below we list the necessary changes and the SDK functions helping with them. In case you're using a language/framework that
 we don't support yet, just reach out. All you need to create a new SDK (or work without one) is the ability to make a few HTTP calls.
 
 :::caution Attention
@@ -24,17 +24,19 @@ Currently the Arcade doesn't support long-running games and therefore no state p
 If you're currently using some persistence, just replace it with some in-memory implementation.
 :::
 
-## Use a fixed random seed
+## Use a fixed random seed (server)
 
-Probably your game has some kind of randomness to it: Where and when enemies spawn, how the level layout is like, etc.
-Now if two players play your game, there is a chance that one player has a significantly easier time than another player.
-Outside of the Arcade this is fine as it will average out over many games. 
+Your game probably has some kind of randomness to it: Where and when enemies spawn, how the level layout is like, etc.
+
+
+If two players play your game, there is a chance that one player has a significantly easier time than another player.
+Outside of the Arcade this is fine as it will average out over many games.
 But for a highly competitive gameplay with money at stake this must not happen.
 
-Every player of the same leaderboard/challenge should get the same level, enemy behavior etc. 
+Every player of the same leaderboard/challenge should get the same level, enemy behavior etc.
 To achieve this you must explicitly set the seed of your random number generator with a seed that we provide to you.
 
-<Tabs groupId="rnd-seed">
+<Tabs groupId="tabs">
 <TabItem value="unity" label="Unity">
 
 ```cs
@@ -49,13 +51,22 @@ private void AutoConnect_OnServerReady()
 <TabItem value="js" label="JavaScript">
 
 ```js
-alert("TODO");
+// JS has no native Random seeding, you must use a package
+// on the client and server like https://github.com/davidbau/seedrandom
+
+const Server = new ArcadeServerSDK();
+
+// ... initialization
+
+const status = await Server.getServerStatus();
+myrng = new Math.seedrandom(status.random_seed);
+// and we should only allow players to join after we setup all randomness
 ```
 
 </TabItem>
 </Tabs>
 
-## Use our authentication
+## Use our authentication (client)
 
 When a player choses to play your game on the Arcade, then we'll create a token (a secret string) that
 proves the player identity, the game they selected and that they had enough funds to join the game.
@@ -64,7 +75,7 @@ We pass this token into the iframe in which your game will start, so that you ca
 The server must use that token then to activate the player session - see next section.
 
 
-<Tabs groupId="get-token">
+<Tabs groupId="tabs">
 <TabItem value="unity" label="Unity">
 
 ```cs
@@ -80,19 +91,44 @@ private void Start()
 <TabItem value="js" label="JavaScript">
 
 ```js
-alert("TODO");
+const ArcadeClient = new ArcadeClientSDK();
+
+// The client constructor will handle fetching the
+// token for the player
+
+// If "", wait until the client has fetched the token
+while (ArcadeClient.sessionToken === "") {
+    // sleep for 10ms without blocking the event loop
+    await new Promise((resolve) => {
+        setTimeout(() => {
+            resolve(null);
+        }, 10);
+    });
+}
+
+// Connect to the server
+const { server_address } = ArcadeClient.getSessionInfo();
+
+if (server_address === "") {
+    // Free to play, no need to connect
+} else {
+    // Playing with money, connect to authoritative server
+    // Example using websocket
+    const wsConn = new Websocket("wss://" + server_address);
+}
+
 ```
 
 </TabItem>
 </Tabs>
 
-## Activate the player session
+## Activate the player session (server)
 
 You need to activate the player's session with the provided token to ensure the connection is legitimate
 and to retrieve information about the player, like their display name. If this fails you MUST disconnect them!
 
 
-<Tabs groupId="activate-session">
+<Tabs groupId="tabs">
 <TabItem value="unity" label="Unity">
 
 ```cs
@@ -110,7 +146,15 @@ private void InitPlayerCmd(string token)
 <TabItem value="js" label="JavaScript">
 
 ```js
-alert("TODO");
+
+try {
+    await Server.activateSlip(playerToken);
+    console.log("Player slip activated!")
+} catch (err) {
+    console.error("failed to activate slip! Going to kick player", err)
+    // KICK PLAYER
+}
+
 ```
 
 </TabItem>
@@ -124,13 +168,13 @@ all final decisions must happen on the server.
 To make the game appear smooth and lag free, you can use techniques like client-side prediction that let the player move locally,
 but the server might respond with a different decision and then the local client must rollback the last move.
 
-## Report win/loss
+## Report win/loss (server)
 
-This is basically the only place that differs between leaderboard games and real-time games. 
+This is basically the only place that differs between leaderboard games and real-time games.
 
 ### For leaderboard games
 
-<Tabs groupId="shutdown">
+<Tabs groupId="tabs">
 <TabItem value="unity" label="Unity">
 
 ```cs
@@ -138,8 +182,8 @@ private void GameOver()
 {
     StartCoroutine(
         this.serverApi.ReportPlayerScore(this.playToken, playerScore,
-            () => UADebug.Log("done"), 
-            err => UADebug.Log("error:" + err) 
+            () => UADebug.Log("done"),
+            err => UADebug.Log("error:" + err)
         )
     );
 }
@@ -149,7 +193,16 @@ private void GameOver()
 <TabItem value="js" label="JavaScript">
 
 ```js
-alert("TODO");
+try {
+    await Server.reportPlayerScore(playerToken, {
+        score: playerScore
+    })
+    console.log("player score reported!")
+} catch (err) {
+    console.error("Failed to report player score", err)
+    // KICK PLAYER
+}
+
 ```
 
 </TabItem>
@@ -157,7 +210,7 @@ alert("TODO");
 
 ### For real-time games
 
-<Tabs groupId="shutdown">
+<Tabs groupId="tabs">
 <TabItem value="unity" label="Unity">
 
 ```cs
@@ -166,22 +219,22 @@ private void GameOver()
     // player has left the game without losing
     StartCoroutine(
         this.serverApi.SettlePlayer(playerToken,
-            () => UADebug.Log("done"), 
-            err => UADebug.Log("error:" + err) 
+            () => UADebug.Log("done"),
+            err => UADebug.Log("error:" + err)
         )
     );
     // player has left lost against the game (e.g. ran into a wall)
     StartCoroutine(
         this.serverApi.SelfDefeatPlayer(playerToken,
-            () => UADebug.Log("done"), 
-            err => UADebug.Log("error:" + err) 
+            () => UADebug.Log("done"),
+            err => UADebug.Log("error:" + err)
         )
     );
     // player has left lost against another player
     StartCoroutine(
         this.serverApi.SelfDefeatPlayer(loserPlayerToken, winnerPlayerToken,
-            () => UADebug.Log("done"), 
-            err => UADebug.Log("error:" + err) 
+            () => UADebug.Log("done"),
+            err => UADebug.Log("error:" + err)
         )
     );
 }
@@ -191,7 +244,32 @@ private void GameOver()
 <TabItem value="js" label="JavaScript">
 
 ```js
-alert("TODO");
+// Player leaves the game without losing
+try {
+    await Server.settleSlip(playerToken)
+    console.log("player slip settled!")
+} catch (err) {
+    console.error("Failed to settle player slip", err)
+    // KICK PLAYER
+}
+
+// Player has lost to the game (e.g. ran into a wall)
+try {
+    await Server.playerSelfDefeat(playerToken)
+    console.log("player self defeated!")
+} catch (err) {
+    console.error("Failed to self defeat player", err)
+    // KICK PLAYER
+}
+
+// Player has lost to another player
+try {
+    await Server.playerDefeated(defeatedPlayerToken, winningPlayerToken)
+    console.log("player defeated to another player!")
+} catch (err) {
+    console.error("Failed to defeat a player to another", err)
+    // KICK PLAYER
+}
 ```
 
 </TabItem>
@@ -199,23 +277,49 @@ alert("TODO");
 
 ## Shutdown the game after the session has ended
 
-When the session has finished the server informs the client about this via a game specific message. Then the server 
-and the client both can shutdown via their respective methods. 
+When the session has finished the server informs the client about this via a game specific message. Then the server
+and the client both can shutdown via their respective methods.
 
-<Tabs groupId="shutdown">
+### Server
+
+<Tabs groupId="tabs">
 <TabItem value="unity" label="Unity">
 
 ```cs
 private void Shutdown()
 {
-    // on the server
     StartCoroutine(
         this.serverApi.Shutdown(
-            () => UADebug.Log("Shutdown requested"), 
-            err => UADebug.Log("couldn't request shutdown:" + err) 
+            () => UADebug.Log("Shutdown requested"),
+            err => UADebug.Log("couldn't request shutdown:" + err)
         )
     );
-    // on the client
+}
+```
+
+</TabItem>
+<TabItem value="js" label="JavaScript">
+
+```js
+try {
+    await Server.shutdown()
+    // can just wait, the hypervisor will send a shutdown signal
+} catch (err) {
+    console.error("Failed to shutdown server", err)
+}
+```
+
+</TabItem>
+</Tabs>
+
+### Client
+
+<Tabs groupId="tabs">
+<TabItem value="unity" label="Unity">
+
+```cs
+private void Shutdown()
+{
     ExternalScriptBehavior.CloseGame();
 }
 ```
@@ -224,9 +328,8 @@ private void Shutdown()
 <TabItem value="js" label="JavaScript">
 
 ```js
-alert("TODO");
+await ArcadeClient.gameOver();
 ```
 
 </TabItem>
 </Tabs>
-
