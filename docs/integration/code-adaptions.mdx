@@ -159,10 +159,10 @@ private void InitPlayerCmd(string token)
 ```js
 
 try {
-    await Server.activateSlip(playerToken);
-    console.log("Player slip activated!")
+    await Server.activatePlayer(playerToken);
+    console.log("Player Player activated!")
 } catch (err) {
-    console.error("failed to activate slip! Going to kick player", err)
+    console.error("failed to activate Player! Going to kick player", err)
     // KICK PLAYER
 }
 
@@ -257,10 +257,10 @@ private void GameOver()
 ```js
 // Player leaves the game without losing
 try {
-    await Server.settleSlip(playerToken)
-    console.log("player slip settled!")
+    await Server.settlePlayer(playerToken)
+    console.log("player session settled!")
 } catch (err) {
-    console.error("Failed to settle player slip", err)
+    console.error("Failed to settle player session", err)
     // KICK PLAYER
 }
 
