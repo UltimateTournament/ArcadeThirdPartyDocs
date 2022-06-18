@@ -8,8 +8,7 @@ const FeatureList = [
     Svg: require('@site/static/img/undraw_docusaurus_mountain.svg').default,
     description: (
       <>
-        Docusaurus was designed from the ground up to be easily installed and
-        used to get your website up and running quickly.
+        It only takes ~4 API calls (frontend and backend combined) to integrate with us!
       </>
     ),
   },
@@ -18,18 +17,18 @@ const FeatureList = [
     Svg: require('@site/static/img/undraw_docusaurus_tree.svg').default,
     description: (
       <>
-        Docusaurus lets you focus on your docs, and we&apos;ll do the chores. Go
-        ahead and move your docs into the <code>docs</code> directory.
+        We know you just want to develop your awesome games and not worry about the
+        details of servers and monetization.
       </>
     ),
   },
   {
-    title: 'Powered by React',
+    title: 'From developers for developers',
     Svg: require('@site/static/img/undraw_docusaurus_react.svg').default,
     description: (
       <>
-        Extend or customize your website layout by reusing React. Docusaurus can
-        be extended while reusing the same header and footer.
+        We know how annoying bad APIs are, therefore we do our very best to create
+        best in class DX!
       </>
     ),
   },
