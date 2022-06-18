@@ -8,7 +8,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 const config = {
   title: 'Ultimate Arcade Developer Docs',
   tagline: 'Ultimate Arcade Developer Docs',
-  url: 'https://your-docusaurus-test-site.com',
+  url: 'https://docs.ultimatearcade.io/',
   baseUrl: '/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
@@ -34,17 +34,13 @@ const config = {
       ({
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
           editUrl:
-            'https://github.com/UltimateTournament/tree/main/packages/create-docusaurus/templates/shared/',
+            'https://github.com/UltimateTournament/ArcadeThirdPartyDocs/tree/main/',
         },
         blog: {
           showReadingTime: true,
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
           editUrl:
-            'https://github.com/UltimateTournament/tree/main/packages/create-docusaurus/templates/shared/',
+            'https://github.com/UltimateTournament/ArcadeThirdPartyDocs/tree/main/',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
@@ -59,7 +55,7 @@ const config = {
       navbar: {
         title: 'Ultimate Arcade Docs',
         logo: {
-          alt: 'My Site Logo',
+          alt: 'The UA Logo',
           src: 'img/logo.svg',
         },
         items: [
@@ -96,16 +92,12 @@ const config = {
             title: 'Community',
             items: [
               {
-                label: 'Stack Overflow',
-                href: 'https://stackoverflow.com/questions/tagged/docusaurus',
-              },
-              {
                 label: 'Discord',
-                href: 'https://discordapp.com/invite/docusaurus',
+                href: 'https://discord.gg/GMD9Yrf9pb',
               },
               {
                 label: 'Twitter',
-                href: 'https://twitter.com/docusaurus',
+                href: 'https://twitter.com/UArcadeIO',
               },
             ],
           },
@@ -123,7 +115,7 @@ const config = {
             ],
           },
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
+        copyright: `Copyright © ${new Date().getFullYear()} Ultimate Tournament, Inc. Built with Docusaurus.`,
       },
       prism: {
         theme: lightCodeTheme,
