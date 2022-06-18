@@ -4,18 +4,13 @@ sidebar_position: 10
 
 # Unity Example Game Integration
 
-<!-- 
-1. https://googledocstomarkdown.com/ 
-2. add alt text
-3. download imgs: grep googleuser unity-example.md | sed 's/!\[\(.*\)\](\(.*\))/-L -o img\/unity-\1.png \2/g' | xargs -n4 curl
-4. fix img paths: sed -i 's/!\[\(.*\)\](\(.*googleusercontent.*\))/![\1](.\/img\/unity-\1.png)/g' unity-example.md
--->
-
 Next, we'll show you how to make a Unity game work with the Ultimate Arcade.
 
 We'll use [Mirror](https://mirror-networking.gitbook.io/), because it’s awesome and open-source but you can use any framework that you want (or none at all) to implement client-server networking.
 
 Another reason is that they bring a few nice examples and we don't want to focus building the game itself.
+
+The full code can be found on [github.com/UltimateTournament/UnityExampleGame](https://github.com/UltimateTournament/UnityExampleGame).
 
 ## Step by Step
 
