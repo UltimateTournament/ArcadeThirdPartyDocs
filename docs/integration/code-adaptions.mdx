@@ -20,8 +20,7 @@ You can get the SDKs here:
 :::caution Attention
 Both the game server and client must respect errors.
 
-The Arcade SDK has built-in retry mechanisms, so if it returns an error or fails to initialize, then is error is final and
-the server and game client should disconnect and exit.
+The Arcade SDK has built-in retry mechanisms, so if it returns an error or fails to initialize, then this error is final and the server and game client should disconnect and exit.
 :::
 
 :::note Game State
@@ -378,4 +377,3 @@ process.on("SIGINT", function () {
 
 </TabItem>
 </Tabs>
-
