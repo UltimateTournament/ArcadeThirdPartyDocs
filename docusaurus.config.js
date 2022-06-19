@@ -7,7 +7,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'Ultimate Arcade Developer Docs',
-  tagline: 'Ultimate Arcade Developer Docs',
+  tagline: 'Monetize your game like never before on the Ultimate Arcade',
   url: 'https://docs.ultimatearcade.io/',
   baseUrl: '/',
   onBrokenLinks: 'throw',
