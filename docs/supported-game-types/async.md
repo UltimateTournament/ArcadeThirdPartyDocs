@@ -4,9 +4,9 @@ sidebar_position: 1
 
 # Async Multiplayer
 
-Asynchronous multiplayer games mean that players are not playing against each other in real time. The formats of async multiplayer, that we currently support are [Leaderboard](#leaderboard-games) and [Challenge](#challenge-games) games.
+## What is Async Multiplayer?
 
-Leaderboard and Challenge games are the encouraged game to make on the Arcade, as they have the highest player satisfaction and don't require nearly as much work to integrate or create servers for.
+Asynchronous multiplayer games mean that players are not playing against each other in real time. They do so instead by competing for the highest score on a time-based Leaderboard, or compete against asynchronous challenges from other players like time trails or score races.
 
 ## Advantages
 
@@ -19,7 +19,9 @@ Async Multiplayer games are the most successful on the Arcade for the following 
 5. They result in far larger prize pools
 6. Easier integration
 
-## Leaderboard games
+## Types of Async Multiplayer Games
+
+### Leaderboard Games
 
 In Leaderboard games, players compete for a high score in a time-based leaderboard. The interval of the leaderboard ranges from days to hours, but is usually 24 hours.
 
