@@ -11,4 +11,4 @@ While real-time multiplayer games are possible (like [cyberworms](https://ultima
 1. Harder to develop a game server
 2. Latency sensitive
 
-Third Party support for real-time multiplayer games is not encouraged at this time. Contact us if you have a real-time game that you think really would profit from the arcade.
+Third Party support for real-time multiplayer games is not encouraged at this time. Contact us if you have a real-time game that you think really would profit from the Arcade.

@@ -6,11 +6,11 @@ sidebar_position: 1
 
 Asynchronous multiplayer games mean that players are not playing against each other in real time. The formats of async multiplayer, that we currently support are [Leaderboard](#leaderboard-games) and [Challenge](#challenge-games) games.
 
-Leaderboard and Challenge games are the encouraged game to make on the arcade, as they have the highest player satisfaction and don't require nearly as much work to integrate or create servers for.
+Leaderboard and Challenge games are the encouraged game to make on the Arcade, as they have the highest player satisfaction and don't require nearly as much work to integrate or create servers for.
 
 ## Advantages
 
-Async Multiplayer games are the most successful on the arcade for the following reasons:
+Async Multiplayer games are the most successful on the Arcade for the following reasons:
 
 1. They don't require concurrent players (players don't need to be playing at the same time)
 2. They are not latency sensitive (to the server)
@@ -38,7 +38,7 @@ At the end of the Leaderboard, the players with the top scores distribute the wi
 
 The winnings are distributed after taking the 10% commission. [Learn more about commission here.](/docs/commission)
 
-Leaderboard games are the most successful games on the arcade, as they have a flywheel effect:
+Leaderboard games are the most successful games on the Arcade, as they have a flywheel effect:
 
 When a player competes in a leaderboard game, the leaderboard pot value increases. In turn, this makes the game more attractive to other players, because there is more to be won for getting a winning score. They then play, and thus increase the value of the leaderboard pot even more. This flywheel spins results in daily prizes of upwards of thousands of dollars from an initial $1 play price (for example).
 

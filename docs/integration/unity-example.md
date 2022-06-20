@@ -73,7 +73,7 @@ Every player of the same leaderboard should get the same level, enemy behavior e
 
 #### Get the player token from client
 
-The frontend needs to get the matchmaking token from the arcade and send it to the server.
+The frontend needs to get the matchmaking token from the Arcade and send it to the server.
 
 We can get it via `ExternalScriptBehavior.Token()` and send it to the server with a Mirror `[Command]`.
 
@@ -154,7 +154,7 @@ namespace Mirror.Examples.Tanks
             {
                 //TODO player should automatically lose when they take longer than the max time
 
-                // score is time left - a bigger score is always better in the arcade
+                // score is time left - a bigger score is always better in the Arcade
                 var maxTime = 5 * 60 * 1000;
                 var score = maxTime - (DateTime.Now - this.joinTime).Milliseconds;
                 StartCoroutine(serverApi.ReportPlayerScore(this.token, score,
@@ -194,4 +194,4 @@ For the server select `Dedicated Server` and select `Linux` as the OS. The expor
 
 For the client select `WebGL` and just hit build - the default config should be fine.
 
-And you're DONE! Congrats on integrating your first game into the arcade!
+And you're DONE! Congrats on integrating your first game into the Arcade!
