@@ -4,11 +4,13 @@ sidebar_position: 1
 
 # Getting Started
 
-Getting your game onto the arcade and start making money with it is easy! Just follow the steps below to get your game integrated to the Ultimate Arcade!
+Getting your game onto the Arcade and start making money with it is easy! Just follow the steps below to get your game integrated to the Ultimate Arcade!
 
 ## 0. Contact Us!
 
-Drop us a line at support[at]ultimatearcade.io and tell us about your great game. We'll setup the necessary paperwork and invite you to our developer Discord where you can get support anytime directly from the team that made the Arcade.
+Drop us a line at support[at]ultimatearcade.io and tell us about your great game. We want to make sure that there are no game mechanics or obstacles that would prevent your game from being compatible with the Arcade before you integrate.
+
+From there we'll setup the necessary paperwork and invite you to our developer Discord where you can get support anytime directly from the team that made the Arcade.
 
 ## 1. Review Supported Game Types
 
@@ -16,7 +18,7 @@ Figure out which category your game falls under in the [Supported Game Types](/d
 
 ## 2. Integrate the Game and Server SDKs
 
-Integrating with the arcade is as easy as adding a few API calls. Have a look at the [Integration Requirements](/docs/integration/integration-requirements) to get started, then follow the integration steps for your specific game type.
+Integrating with the Arcade is as easy as adding a few API calls. Have a look at the [Integration Requirements](/docs/integration/integration-requirements) to get started, then follow the integration steps for your specific game type.
 
 ## 3. Submit Your Game for Review
 
@@ -30,7 +32,7 @@ You will also be able to test your game end-to-end on our staging environment.
 
 ## 4. Add the Final Touches
 
-Before we can launch the game we need assets for the arcade like preview images and description texts. See the [Final Touches](/docs/integration/final-touches) section for more details.
+Before we can launch the game we need assets for the Arcade like preview images and description texts. See the [Final Touches](/docs/integration/final-touches) section for more details.
 
 ## 5. Launch!
 
