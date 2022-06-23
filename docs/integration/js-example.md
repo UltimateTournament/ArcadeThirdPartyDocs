@@ -61,7 +61,7 @@ const playerName = actResp.display_name
 const playerID = actResp.player_id
 ```
 
-You MUST use the playerID from this call to identify the player to ensure that the same player can't connect twice. We try to prevent this on our end, too, but there are always some small time windows when this might happen.
+You MUST use the playerID from this call to identify the player to ensure that the same player can't connect twice.
 
 You should also not call this method twice. So it's a good idea to store the `player_token` in your player object, and if you get a connection check if it's just a reconnect after a dropped connection by comparing the player tokens.
 
