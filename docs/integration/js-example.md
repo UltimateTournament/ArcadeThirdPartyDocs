@@ -1,5 +1,5 @@
 ---
-sidebar_position: 11
+sidebar_position: 8
 ---
 
 # Javascript Example Game Integration
@@ -79,7 +79,7 @@ This is only relevant for pool games. Pool games are games that follow the patte
 4. closing the game
 :::
 
-After all/enough players have joined we need to close the money pool so no new players can join in the middle of the running game:
+After all/enough players have joined we need to close the money pool so no new players cannot join in the middle of the running game:
 
 ```typescript
 await uaSDK.lockPool()
@@ -98,7 +98,7 @@ But once you've determined a game result, here's what to do with that informatio
 await uaSDK.playerDefeated(loser.player_token, winner.player_token)
 ```
 
-#### LOL, player killed themselves
+#### Player killed themselves
 
 This is only relevant if your game is player competing against each other (like in pvp and pool games) but also has some game level obstacles.
 E.g. in Cyber Worms it's possible to run into a wall and die.
@@ -150,5 +150,5 @@ await uaSDK.shutdown()
 
 Remember to design the game in a way that
 1. higher-score == better
-2. it's very improbably that two players reach the same score
+2. it's very improbable that two players reach the same score
 
