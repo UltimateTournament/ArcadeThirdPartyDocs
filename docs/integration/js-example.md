@@ -50,7 +50,7 @@ const { server_address, player_token } = await uaSDK.getSessionInfo()
 // The `server_address` is the address at which you'll reach your backend server, e.g. `your.host.com:1234`
 ```
 
-### Ensuring the connected player is valid
+### Activate the player's game session
 
 When you get a connection (probably via WebSockets) you still need to ensure that a legitimate user has reached your server.
 
