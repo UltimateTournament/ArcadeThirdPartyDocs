@@ -22,7 +22,6 @@ Just place this file next to your `package.json` and include it in all deliverie
 
 On the frontend run `npm i --save @ultimatearcade/client-sdk` and on the backend run `npm i --save @ultimatearcade/server-sdk`.
 
-BTW, you can use a single code base for frontend and backend, but you need to ship us a folder with static assets (HTML,JS,CSS,...) for the frontend as we don't run the frontend as a nodeJS server to save resources.
 
 ### Initialize the SDK
 
