@@ -53,7 +53,7 @@ const { server_address, player_token } = await uaSDK.getSessionInfo()
 ### Activate the player's game session
 
 
-The frontend should therefore send you the `player_token` it got above inside the very first message to your server. You then can verify it and get more player information like this:
+Next you activate the `player_token` on your server. Activation will give you more player information like this:
 
 ```typescript
 const playerInfo = await uaSDK.activatePlayer(initialMessage.player_token)
