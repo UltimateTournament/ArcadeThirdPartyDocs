@@ -52,7 +52,6 @@ const { server_address, player_token } = await uaSDK.getSessionInfo()
 
 ### Activate the player's game session
 
-When you get a connection (probably via WebSockets) you still need to ensure that a legitimate user has reached your server.
 
 The frontend should therefore send you the `player_token` it got above inside the very first message to your server. You then can verify it and get more player information like this:
 
