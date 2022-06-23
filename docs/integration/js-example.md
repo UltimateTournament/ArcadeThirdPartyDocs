@@ -63,7 +63,7 @@ const playerID = actResp.player_id
 
 You MUST use the playerID from this call to identify the player to ensure that the same player can't connect twice.
 
-You should also not call this method twice. So it's a good idea to store the `player_token` in your player object, and if you get a connection check if it's just a reconnect after a dropped connection by comparing the player tokens.
+It's a good idea to store the `player_token` in your stored player objects. When a new connection comes in, check if it's just a reconnect after a dropped connection by comparing the player tokens.
 
 ### Starting the game, locking the pool
 
