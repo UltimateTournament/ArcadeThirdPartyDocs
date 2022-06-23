@@ -45,11 +45,9 @@ await yourServer.listen({ port: process.env.PORT }) // ensure to listen on the p
 ```typescript
 import {getSDK} from '@ultimatearcade/client-sdk'
 const uaSDK = getSDK()
-const si = await uaSDK.getSessionInfo()
-// this is the address at which you'll reach your backend server, e.g. `your.host.com:1234`
-const serverAddress = si.server_address
-// this is a secret string that authenticates the user. Send it to your backend so it can use it later
-const = si.player_token
+const { server_address, player_token } = await uaSDK.getSessionInfo()
+// The `player_token` is a secret string that authenticates the user. Send it to your backend so it can use it later
+// The `server_address` is the address at which you'll reach your backend server, e.g. `your.host.com:1234`
 ```
 
 ### Ensuring the connected player is valid
