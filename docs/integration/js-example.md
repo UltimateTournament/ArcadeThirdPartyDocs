@@ -4,24 +4,19 @@ sidebar_position: 8
 
 # Javascript Example Game Integration
 
-In the next section we'll guide you through the relevant changes that you have to make to your game.
+In the next section we'll guide you through the relevant changes that you have to make to a game of Tic Tac Toe to make it integrate into the Arcade.
 
-We have an example game of TicTacToe implemented in TypeScript with NodeJS. You can get it from [github.com/UltimateTournament/NodeJS-Example-TicTacToe](https://github.com/UltimateTournament/NodeJS-Example-TicTacToe). You can also check out [the PR](https://github.com/UltimateTournament/NodeJS-Example-TicTacToe/pull/2) which contains most of these changes.
+The example game is implemented in TypeScript with NodeJS for the backend and VueJS for the frontend. You can get it from [github.com/UltimateTournament/NodeJS-Example-TicTacToe](https://github.com/UltimateTournament/NodeJS-Example-TicTacToe). For the TLDR of this section you can also check out [the PR](https://github.com/UltimateTournament/NodeJS-Example-TicTacToe/pull/2) which contains most of these changes.
 
-Note that the example game is a "pool" game (more on that below) but we'll list the options for all game modes and note when each is applicable.
+Note that this game is a "winner takes it all"-style game where everyone who is competing pays into a "pool" (more on that below). Check the list of [code adaptions](./code-adaptions) for other games.
 
 ## Integrating the game into the Ultimate Arcade
 
-### Dockerfile for your server
-
-As every server is slightly different and we need to run them all, you need to provide us with a Dockerfile. If you haven't used Docker before, that's not a problem. Just use the Dockerfile from [our NodeJS SDK](https://github.com/UltimateTournament/ArcadeNodeJSSDK/blob/main/Dockerfile) and adapt the `npm run build` command to match your project.
-
-Just place this file next to your `package.json` and include it in all deliveries of your game to us.
+We'll skip over building the actual game of TicTacToe. You got this.
 
 ### Add our SDKs
 
 On the frontend run `npm i --save @ultimatearcade/client-sdk` and on the backend run `npm i --save @ultimatearcade/server-sdk`.
-
 
 ### Initialize the SDK
 
@@ -29,6 +24,8 @@ This should be the very first thing you do. You don't want your players to start
 because something wasn't quite right.
 
 #### On the server
+
+The easiest way to be sure that everything is consistent is to only start the server when the SDK tells us that the server is ready:
 
 ```typescript
 import { getSDK } from '@ultimatearcade/server-sdk'
@@ -42,40 +39,69 @@ await yourServer.listen({ port: process.env.PORT }) // ensure to listen on the p
 
 #### On the frontend
 
+We'll just create another store for interacting with the UA API:
+
 ```typescript
-import {getSDK} from '@ultimatearcade/client-sdk'
-const uaSDK = getSDK()
-const { server_address, player_token } = await uaSDK.getSessionInfo()
-// The `player_token` is a secret string that authenticates the user. Send it to your backend so it can use it later
-// The `server_address` is the address at which you'll reach your backend server, e.g. `your.host.com:1234`
+export const uaState = defineStore({
+  id: 'ultimate-arcade',
+  state: () => ({
+    _uaSDK: getSDK(),
+    playerInfo: {} as PlayerInfo,
+    serverAddress: '',
+    token: '',
+  }),
+  actions: {
+    async init() {
+      if (!this.token) {
+        let si = await this._uaSDK.getSessionInfo()
+        this.serverAddress = si.server_address
+        this.token = si.player_token
+        this.playerInfo = await this._uaSDK.getPlayerProfile()
+      }
+    },
+    async gameOver() {
+      await this._uaSDK.gameOver()
+    }
+  }
+})
 ```
 
 ### Activate the player's game session
 
-
-Next you activate the `player_token` on your server. Activation will give you more player information like this:
+We'll extend the game's `join` method to ensure we get a player token and that it's good.
+And while we're at it, we also add player display names:
 
 ```typescript
-const playerInfo = await uaSDK.activatePlayer(initialMessage.player_token)
-const playerName = actResp.display_name
-const playerID = actResp.player_id
+export class TicTacToe {
+  // ...
+  async join(msg: { playerID?: string, token: string }): Promise<{
+      response: { playerID: string, state: gameStates, symbol: string } | { refused: true },
+      gameState?: PublicGameState,
+      refused: boolean
+  }> {
+      if (!msg.token) {
+          return { refused: true, response: { refused: true } }
+      }
+      if (msg.playerID) {
+          // ...
+      }
+      let playerName = ""
+      try {
+          const actResp = (await this.uaSDK.activatePlayer(msg.token))
+          playerName = actResp.display_name
+      } catch (err) {
+          console.log("couldn't activate player: ", err)
+          return { refused: true, response: { refused: true } }
+      }
+      // ...
+  }
+  // ...
+}
 ```
-
-You MUST use the playerID from this call to identify the player to ensure that the same player can't connect twice.
-
-It's a good idea to store the `player_token` in your stored player objects. When a new connection comes in, check if it's just a reconnect after a dropped connection by comparing the player tokens.
 
 ### Starting the game, locking the pool
 
-:::note
-This is only relevant for pool games. Pool games are games that follow the pattern of
-1. waiting for enough players
-2. starting the game
-3. playing and determining a winner
-4. closing the game
-:::
-
-After all/enough players have joined we need to close the money pool so no new players cannot join in the middle of the running game:
+After both players have joined we need to close the money pool so no new players can join in the middle of the running game:
 
 ```typescript
 await uaSDK.lockPool()
@@ -83,68 +109,35 @@ await uaSDK.lockPool()
 
 ### Reporting game results
 
-Figuring out who won/lost (in pool or PvP games) or what the score (in leaderboard games) of a player is of course completely game-specific and up to you make sure the mechanics for this are good and fair.
+Latest now we realize that maybe TicTacToe wasn't the best choice for a competitive game:
 
-But once you've determined a game result, here's what to do with that information
-
-#### Player lost against an opponent
-
+It's easy for a draw to happen. In you're game you should make this far harder, but we anyhow have to handle the end of our game now, determine who won and settle or return the pool accordingly:
 
 ```typescript
-await uaSDK.playerDefeated(loser.player_token, winner.player_token)
+async play(msg: { playerID: string, moveX: number, moveY: number }): Promise<{response?: never; gameState?: PublicGameState; gameOver: boolean }> {
+    // ...
+    const winnerSymbol = this.getWinner()
+    if (winnerSymbol != "") {
+        this.currentPlayer = ""
+        let winner, loser;
+        if (winnerSymbol == "X") {
+            this.state = gameStates.xWon
+            loser = this.getPlayer("O")?.token!
+            winner = this.getPlayer("X")?.token!
+        } else {
+            this.state = gameStates.oWon                
+            loser = this.getPlayer("O")?.token!
+            winner = this.getPlayer("X")?.token!
+        }
+        // someone won
+        await this.uaSDK.playerDefeated(loser, winner)
+        await this.uaSDK.settlePool(winner)
+    } else if (this.boardFull()) {
+        this.state = gameStates.draw
+        this.currentPlayer = ""
+        // it's a draw :(
+        await this.uaSDK.returnPool("draw")
+    }
+    // ...
+}
 ```
-
-#### Player killed themselves
-
-This is only relevant if your game is player competing against each other (like in pvp and pool games) but also has some game level obstacles.
-E.g. in Cyber Worms it's possible to run into a wall and die.
-
-```typescript
-await uaSDK.playerSelfDefeat(loser.player_token)
-```
-
-It depends on the game mode what happens with the player's tokens. In PvP-Mode they lose a part of it as commission and get back the rest. In Pool-Mode they just lose all the money to the pool and the only difference to loosing against a player is in the statistics.
-
-#### Ending the game with a winner
-
-:::note
-This is only relevant for pool games
-:::
-
-
-```typescript
-await uaSDK.settlePool(winner.player_token)
-// this stops the server and we'll start a new one for the next game
-await uaSDK.shutdown()
-```
-
-#### Ending the game without a winner
-
-:::note
-This is only relevant for pool games and even there you should design your game in a way that draws are very rare.
-:::
-
-If it's not possible to determine a winner you'll have to return the pool like this:
-
-```typescript
-await this.uaSDK.returnPool("reason why we had to return. E.g. 'draw'")
-// this stops the server and we'll start a new one for the next game
-await uaSDK.shutdown()
-```
-
-#### Reporting the final score of the player
-
-:::note
-This is only relevant for leaderboard games.
-:::
-
-```typescript
-await this.uaSDK.reportPlayerScore(player.player_token, {score: 999})
-// this stops the server and we'll start a new one for the next game
-await uaSDK.shutdown()
-```
-
-Remember to design the game in a way that
-1. higher-score == better
-2. it's very improbable that two players reach the same score
-
