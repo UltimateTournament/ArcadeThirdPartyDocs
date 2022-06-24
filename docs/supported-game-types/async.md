@@ -4,6 +4,8 @@ sidebar_position: 1
 
 # Async Multiplayer
 
+Leaderboards and other non-concurrent ways of competing.
+
 ## What is Async Multiplayer?
 
 Asynchronous multiplayer games mean that players are not playing against each other in real time. They do so instead by competing for the highest score on a time-based Leaderboard, or compete against asynchronous challenges from other players like time trails or score races.

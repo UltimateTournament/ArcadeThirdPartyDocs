@@ -4,11 +4,21 @@ sidebar_position: 2
 
 # Real-time Multiplayer
 
-While real-time multiplayer games are possible (like [cyberworms](https://ultimatearcade.io/cyber-worms) and [cyberworms battle royale](https://ultimatearcade.io/cyber-worms?mode=battle-royale)), they can be more difficult to build, integrate, maintain, and monetize.
+While in async-multiplayer games you interact with your opponents only indirectly (e.g. competing for a better score) in real-time multiplayer games directly interact with them.
 
-Some real-time games can be very easy to make, so please reach out so we can discuss!
+In this category we need to differentiate between two kinds of games:
+**Latency sensitive** (fast paced action games) and **not latency sensitive** games (mostly round-based games).
 
-## Considerations
+While latency sensitive games are possible (like [cyberworms](https://ultimatearcade.io/cyber-worms) and [cyberworms battle royale](https://ultimatearcade.io/cyber-worms?mode=battle-royale)), they are far more difficult to build and maintain.
+
+If your game doesn't mind if there's a few hundred milliseconds delay, then it's far easier to host them and keep up a great player experience.
+
+For real-time games we support to types of games
+* *Player vs Player (PvP)* - players come and go and might fight each other in an open session
+* *Winner takes it all (WTA)* - players come together for one round, compete, and the winner gets all the money in the *pool*
+  * this is where the SDK's `lockPool`, `settlePool` and `returnPool` methods are needed
+
+## Considerations if you still decide to create a latency-sensitive game
 
 Some things you need to think about when making real-time games:
 
@@ -16,16 +26,3 @@ Some things you need to think about when making real-time games:
 2. Client-side prediction - as part of latency compensation, you will probably want to implement client-side prediction
 3. Bandwidth - real-time multiplayer games can have high bandwidth requirements. This impacts the number of players in game, as well as revenue share agreement (as we bear the cost of egress)
 4. Multiple connected players - ensuring that events are processed in order, no concurrency issues or race conditions, and other methods to ensure that events are processed on the server in a way that is verifiably correct and fair
-
-## Advantages
-
-1. Potentially higher engagement between players
-2. Potentially lower player game session durations
-
-## Disadvantages
-
-1. Potentially Harder to develop a game server
-2. Potentially latency sensitive
-3. Requires concurrent players for activity (players cannot play by themselves)
-4. Lower player retention
-5. Potential teaming - if players are able to gang up on individuals, those individuals will have a very bad experience and may never play your game again
