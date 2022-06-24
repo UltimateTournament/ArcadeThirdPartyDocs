@@ -9,7 +9,7 @@ need the following to publish it to the Arcade:
 
 ## Game Info
 
-The absolute minimum, that we need to know about a game is its name and the [type of game](../supported-game-types). 
+The absolute minimum, that we need to know about a game is its name and the [type of game](../category/supported-game-types). 
 
 ## Short Description
 
