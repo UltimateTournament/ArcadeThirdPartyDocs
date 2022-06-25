@@ -4,7 +4,7 @@ sidebar_position: 2
 
 # Real-time Multiplayer
 
-While in async-multiplayer games you interact with your opponents only indirectly (e.g. competing for a better score) in real-time multiplayer games directly interact with them.
+While in async-multiplayer games you interact with your opponents only indirectly (e.g. competing for a better score) in real-time multiplayer games players directly interact with each other.
 
 In this category we need to differentiate between two kinds of games:
 **Latency sensitive** (fast paced action games) and **not latency sensitive** games (mostly round-based games).
