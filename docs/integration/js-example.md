@@ -2,7 +2,7 @@
 sidebar_position: 8
 ---
 
-# Javascript Example Game Integration
+# JavaScript Example Game Integration
 
 In the next section we'll guide you through the relevant changes that you have to make to a game of Tic Tac Toe to make it integrate into the Arcade.
 
