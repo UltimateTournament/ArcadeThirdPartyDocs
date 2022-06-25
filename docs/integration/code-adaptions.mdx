@@ -17,7 +17,7 @@ You can get the SDKs here:
 * Javascript/TypeScript [browser SDK](https://github.com/UltimateTournament/ArcadeJSClientSDK) and [server SDK](https://github.com/UltimateTournament/ArcadeNodeJSSDK)
 * For all other stacks, just reach out to us. Using our Platform without an as SDK is easy too and requires just a few HTTP calls
 
-:::caution Attention
+:::caution Handling Errors
 Both the game server and client must respect errors.
 
 The Arcade SDK has built-in retry mechanisms, so if it returns an error or fails to initialize, then this error is final and the server and game client should disconnect and exit.
@@ -25,7 +25,7 @@ The Arcade SDK has built-in retry mechanisms, so if it returns an error or fails
 
 :::note Game State
 Currently the Arcade doesn't support long-running games and therefore no state persistence is provided.
-If you're currently using some persistence, just replace it with some in-memory implementation.
+If you're currently using some persistence, just replace it with an in-memory implementation.
 :::
 
 ## Timeouts and Disconnects
@@ -106,30 +106,14 @@ private void Start()
 ```js
 const ArcadeClient = new ArcadeClientSDK();
 
-// The client constructor will handle fetching the
-// token for the player
-
-// If "", wait until the client has fetched the token
-while (ArcadeClient.sessionToken === "") {
-    // sleep for 10ms without blocking the event loop
-    await new Promise((resolve) => {
-        setTimeout(() => {
-            resolve(null);
-        }, 10);
-    });
-}
-
 // Connect to the server
-const { server_address } = ArcadeClient.getSessionInfo();
+const { server_address, player_token } = await ArcadeClient.getSessionInfo();
+// The `player_token` is a secret string that authenticates the user. Send it to your backend so it can use it later
+// The `server_address` is the address at which you'll reach your backend server, e.g. `your.host.com:1234`
 
-if (server_address === "") {
-    // Free to play, no need to connect
-} else {
-    // Playing with money, connect to authoritative server
-    // Example using websocket
-    const wsConn = new Websocket("wss://" + server_address);
-}
-
+// connect to authoritative server e.g. using websocket
+const wsConn = new Websocket("wss://" + server_address);
+// send your first message, which must include `player_token` - see below
 ```
 
 </TabItem>
@@ -163,7 +147,7 @@ private void InitPlayerCmd(string token)
 ```js
 
 try {
-    await Server.activatePlayer(playerToken);
+    const { display_name, player_id} = await Server.activatePlayer(playerToken);
     console.log("Player Player activated!")
 } catch (err) {
     console.error("failed to activate Player! Going to kick player", err)
@@ -185,7 +169,9 @@ but the server might respond with a different decision and then the local client
 
 ## Report win/loss (server)
 
-This is basically the only place that differs between leaderboard games and real-time games.
+Figuring out who won/lost (in pool or PvP games) or the score (in leaderboard games) of a player is of course completely game-specific and up to you, so make sure the mechanics for this are good and fair.
+
+This is the main difference between leaderboard and real-time games.
 
 ### For leaderboard games
 
