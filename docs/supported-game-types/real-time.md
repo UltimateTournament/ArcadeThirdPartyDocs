@@ -13,7 +13,7 @@ While latency sensitive games are possible (like [cyberworms](https://ultimatear
 
 If your game doesn't mind if there's a few hundred milliseconds delay, then it's far easier to host them and keep up a great player experience.
 
-For real-time games we support to types of games
+For real-time games we support two types of games:
 * *Player vs Player (PvP)* - players come and go, might fight each other in an open session
 * *Winner takes it all (WTA)* - players come together for one round, compete, and the winner gets all the money in the *pool*
   * this is where the SDK's `lockPool`, `settlePool` and `returnPool` methods are needed
