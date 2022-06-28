@@ -32,6 +32,16 @@ Whether you connect to a game server is dependent on the game mode, see [Free to
 
 The game should not require lots of CPU or memory to run. A good litmus test is that the game can run well on a mobile browser.
 
+## Limit Play Time
+
+You must not give players unlimited time to finish the game or their turn to prevent players from winning a game by just
+annoying their opponent out of the game.
+
+Good limits are <2min for finishing turn and <20min for finishing the whole game. But shorter is often better as it makes the
+game more engaging and allows for more game sessions to be played.
+
+It's good practice to show a very visible timer on screen so players are not surprised when you make them lose after the time runs out.
+
 ## Seeded Randomness
 
 For any randomness that could appear in the game, it must be able to be controlled with a seed provided by the SDK.
