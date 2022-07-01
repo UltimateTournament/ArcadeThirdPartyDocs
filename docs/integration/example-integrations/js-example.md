@@ -8,7 +8,7 @@ In the next section we'll guide you through the relevant changes that you have t
 
 The example game is implemented in TypeScript with NodeJS for the backend and VueJS for the frontend. You can get it from [github.com/UltimateTournament/NodeJS-Example-TicTacToe](https://github.com/UltimateTournament/NodeJS-Example-TicTacToe). For the TLDR of this section you can also check out [the PR](https://github.com/UltimateTournament/NodeJS-Example-TicTacToe/pull/2) which contains most of these changes.
 
-Note that this game is a "winner takes it all"-style game where everyone who is competing pays into a "pool" (more on that below). Check the list of [code adaptions](./code-adaptions) for other games.
+Note that this game is a "winner takes it all"-style game where everyone who is competing pays into a "pool" (more on that below). Check the list of [code adaptions](../code-adaptions) for other games.
 
 ## Integrating the game into the Ultimate Arcade
 
