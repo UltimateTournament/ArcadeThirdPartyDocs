@@ -16,11 +16,60 @@ function HomepageHeader() {
         <h1 className="hero__title">{siteConfig.title}</h1>
         <p className="hero__subtitle">{siteConfig.tagline}</p>
         <div className={styles.buttons}>
-          <Link
+          {/* <Link
             className="button button--secondary button--lg"
             to="/docs/getting-started">
             View Docs
-          </Link>
+          </Link> */}
+          <div style={{
+  display: "flex",
+  flexDirection: "row",
+  flexWrap: "wrap"
+}}>
+  <article class="col col--6 margin-bottom--lg">
+      <a class="card padding--lg cardContainer_node_modules-@docusaurus-theme-classic-lib-theme-DocCard-styles-module" href="/docs/integration/high-level">
+        <h2 class="text--truncate cardTitle_node_modules-@docusaurus-theme-classic-lib-theme-DocCard-styles-module">
+           High Level Overview
+        </h2>
+        <p class="text--truncate cardDescription_node_modules-@docusaurus-theme-classic-lib-theme-DocCard-styles-module">
+          How integration works
+        </p>
+      </a>
+  </article>
+
+  <article class="col col--6 margin-bottom--lg">
+      <a class="card padding--lg cardContainer_node_modules-@docusaurus-theme-classic-lib-theme-DocCard-styles-module" href="/docs/integration/code-adaptions">
+        <h2 class="text--truncate cardTitle_node_modules-@docusaurus-theme-classic-lib-theme-DocCard-styles-module">
+          Integrate Your Game
+        </h2>
+        <p class="text--truncate cardDescription_node_modules-@docusaurus-theme-classic-lib-theme-DocCard-styles-module">
+          Integrate with our SDKs
+        </p>
+      </a>
+  </article>
+
+  <article class="col col--6 margin-bottom--lg">
+    <a class="card padding--lg cardContainer_node_modules-@docusaurus-theme-classic-lib-theme-DocCard-styles-module" href="/docs/integration/unity-example">
+      <h2 class="text--truncate cardTitle_node_modules-@docusaurus-theme-classic-lib-theme-DocCard-styles-module">
+        Unity Integration Example
+      </h2>
+      <p class="text--truncate cardDescription_node_modules-@docusaurus-theme-classic-lib-theme-DocCard-styles-module">
+        Tutorial integrating a Unity game
+      </p>
+    </a>
+  </article>
+
+  <article class="col col--6 margin-bottom--lg">
+    <a class="card padding--lg cardContainer_node_modules-@docusaurus-theme-classic-lib-theme-DocCard-styles-module" href="/docs/integration/js-example">
+      <h2 class="text--truncate cardTitle_node_modules-@docusaurus-theme-classic-lib-theme-DocCard-styles-module">
+        JS Integration Example
+      </h2>
+      <p class="text--truncate cardDescription_node_modules-@docusaurus-theme-classic-lib-theme-DocCard-styles-module">
+          Tutorial integrating a JS game
+      </p>
+    </a>
+  </article>
+</div>
         </div>
       </div>
     </header>
@@ -35,7 +84,7 @@ export default function Home() {
       description="Description will go into a meta tag in <head />">
       <HomepageHeader />
       <main>
-        <Redirect to="/docs/getting-started" />
+        {/* <Redirect to="/docs/getting-started" /> */}
         <HomepageFeatures />
       </main>
     </Layout>
