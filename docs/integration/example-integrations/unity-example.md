@@ -17,7 +17,7 @@ The full code can be found on [github.com/UltimateTournament/UnityExampleGame](h
 ### Create a new game
 We're using Unity version 2021.3
 
-![create-project](./img/unity-create-project.png)
+![create-project](../img/unity-create-project.png)
 
 ### Install Mirror
 
@@ -25,11 +25,11 @@ First add it to your account from the [Unity Asset Store](https://assetstore.uni
 
 Next, import it into your project:
 
-![import-mirror](./img/unity-import-mirror.png)
+![import-mirror](../img/unity-import-mirror.png)
 
 When importing, remove all examples, but the "Tanks" example. We'll make it the easiest high-score game ever! You have 300 seconds to fire 5 shots. Whoever has the most time left after finishing this "challenge" gets the highest score! Exciting!
 
-![mirror-examples](./img/unity-mirror-examples.png)
+![mirror-examples](../img/unity-mirror-examples.png)
 
 Now move the example to your root folder so you don’t get any namespace issues when we start modifying the code.
 
@@ -44,22 +44,22 @@ Now that all the external code is there, lets setup our project correctly.
 
 Open the scene, then go to the build settings and click "Add Open Scene" and remove the empty scene that Unity initially created.
 
-![set-scene](./img/unity-set-scene.png)
+![set-scene](../img/unity-set-scene.png)
 
 ### Configuring the network
 
 The game will run on the web and browsers only support WebSockets, so go to the `Network Manager`, remove the `KCP Transport` and add a `Simple Web Transport` script.
 
 
-![web-transport](./img/unity-web-transport.png)
+![web-transport](../img/unity-web-transport.png)
 
 Ensure to update the `Transport` reference in the `Network Manager` as well:
 
-![transport-reference](./img/unity-transport-reference.png)
+![transport-reference](../img/unity-transport-reference.png)
 
 We need to automatically connect but only after the SDK has finished its magic. Therefore disable its own auto-start:
 
-![auto-connect](./img/unity-auto-connect.png)
+![auto-connect](../img/unity-auto-connect.png)
 
 And add the SDK's `Auto Connect` script as a new component to the `Network Manager`.
 
@@ -186,7 +186,7 @@ namespace Mirror.Examples.Tanks
 
 We require builds to be self-contained. The easiest way to achive that is to set `Project Settings -> Player Settings -> Scripting Backend` to `IL2CPP`:
 
-![scripting-backend](./img/unity-scripting-backend.png)
+![scripting-backend](../img/unity-scripting-backend.png)
 
 Now you can export your game!
 
