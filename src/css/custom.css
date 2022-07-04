@@ -42,3 +42,12 @@ html[data-theme='dark'] {
   background: linear-gradient(190deg,rgba(19,17,35,0),#131123 72.11%),linear-gradient(212.5deg,#f416a8 10.06%,#ad16f4 74.57%), linear-gradient(180deg,#242049 0.15%,#17152f);
   --ifm-hero-text-color: #efefef;
 }
+
+.artcard {
+  /* border-color: white; */
+  border-color: var(--ifm-color-emphasis-400);
+  border-width: 1px;
+  border-style: solid;
+  --ifm-link-color: var(--ifm-color-emphasis-800);
+  --ifm-link-hover-color: var(--ifm-color-emphasis-700)
+}

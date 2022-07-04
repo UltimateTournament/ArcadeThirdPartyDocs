@@ -26,8 +26,6 @@ When a player selects your game on the Arcade, they want to start playing right 
 
 Therefore, when the game client is loaded, it should start the game without additional required interaction from the player. At this time the slip has already been created, and the game server provisioned for this session. A countdown timer is acceptable, but should be synced with the server.
 
-Whether you connect to a game server is dependent on the game mode, see [Free to Play/Practice Mode](#free-to-playpractice-mode)
-
 ## Low Resource Requirements
 
 The game should not require lots of CPU or memory to run. A good litmus test is that the game can run well on a mobile browser.
@@ -50,4 +48,4 @@ The litmus test is that given the same seed, and the same user inputs, the exact
 
 ## Free to Play/Practice Mode
 
-All games should have a "free to play" or "practice" mode. This is where the player does not pay any tokens up front, but does not earn any tokens. In this case, the server host will be `""` (blank string) and you should not connect to a server, everything can run locally.
+All games should have a "free to play" or "practice" mode. This is where the player does not pay any tokens up front, but does not earn any tokens. The game will still connect to a server and have a slip, and only the score will be shown to the player after the game ends. There is no Leaderboard.

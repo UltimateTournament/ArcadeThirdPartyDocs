@@ -4,6 +4,7 @@ import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Layout from '@theme/Layout';
 import HomepageFeatures from '@site/src/components/HomepageFeatures';
+import LinkTile from '../components/linkTile.jsx'
 
 import styles from './index.module.css';
 import { Redirect } from '@docusaurus/router';
@@ -26,49 +27,14 @@ function HomepageHeader() {
   flexDirection: "row",
   flexWrap: "wrap"
 }}>
-   <article class="col col--6 margin-bottom--lg">
-      <a class="card padding--lg cardContainer_node_modules-@docusaurus-theme-classic-lib-theme-DocCard-styles-module" href="/docs/integration/high-level">
-        <h2 class="text--truncate cardTitle_node_modules-@docusaurus-theme-classic-lib-theme-DocCard-styles-module">
-           Before You Integrate
-        </h2>
-        <p class="text--truncate cardDescription_node_modules-@docusaurus-theme-classic-lib-theme-DocCard-styles-module">
-          Considerations before jumping in
-        </p>
-      </a>
-  </article>
+  <LinkTile title="Before You Integrate" description="Considerations before jumping in" href="/docs/category/before-you-begin" />
 
-  <article class="col col--6 margin-bottom--lg">
-      <a class="card padding--lg cardContainer_node_modules-@docusaurus-theme-classic-lib-theme-DocCard-styles-module" href="/docs/integration/high-level">
-        <h2 class="text--truncate cardTitle_node_modules-@docusaurus-theme-classic-lib-theme-DocCard-styles-module">
-           High Level Overview
-        </h2>
-        <p class="text--truncate cardDescription_node_modules-@docusaurus-theme-classic-lib-theme-DocCard-styles-module">
-          How integration works
-        </p>
-      </a>
-  </article>
+  <LinkTile title="High Level Overview" description="How integration works" href="/docs/integration/high-level" />
 
-  <article class="col col--6 margin-bottom--lg">
-      <a class="card padding--lg cardContainer_node_modules-@docusaurus-theme-classic-lib-theme-DocCard-styles-module" href="/docs/integration/code-adaptions">
-        <h2 class="text--truncate cardTitle_node_modules-@docusaurus-theme-classic-lib-theme-DocCard-styles-module">
-          Integrate Your Game
-        </h2>
-        <p class="text--truncate cardDescription_node_modules-@docusaurus-theme-classic-lib-theme-DocCard-styles-module">
-          Integrate with our SDKs
-        </p>
-      </a>
-  </article>
+  <LinkTile title="Integrate Your Game" description="Integrate with our SDKs" href="/docs/integration/code-adaptions" />
 
-  <article class="col col--6 margin-bottom--lg">
-    <a class="card padding--lg cardContainer_node_modules-@docusaurus-theme-classic-lib-theme-DocCard-styles-module" href="/docs/category/example-integrations">
-      <h2 class="text--truncate cardTitle_node_modules-@docusaurus-theme-classic-lib-theme-DocCard-styles-module">
-        Integration Examples
-      </h2>
-      <p class="text--truncate cardDescription_node_modules-@docusaurus-theme-classic-lib-theme-DocCard-styles-module">
-        Tutorials for Unity and JS
-      </p>
-    </a>
-  </article>
+  <LinkTile title="Integration Examples" description="Tutorials for Unity and JS" href="/docs/category/example-integrations" />
+
 </div>
         </div>
       </div>
