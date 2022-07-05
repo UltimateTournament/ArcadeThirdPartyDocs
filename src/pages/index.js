@@ -27,9 +27,9 @@ function HomepageHeader() {
   flexDirection: "row",
   flexWrap: "wrap"
 }}>
-  <LinkTile title="Before You Integrate" description="Considerations before jumping in" href="/docs/category/before-you-begin" />
+  <LinkTile title="Before You Begin" description="Considerations before jumping in" href="/docs/category/before-you-begin" />
 
-  <LinkTile title="High Level Overview" description="How integration works" href="/docs/integration/high-level" />
+  <LinkTile title="High-Level Overview" description="How integration works" href="/docs/integration/high-level" />
 
   <LinkTile title="Integrate Your Game" description="Integrate with our SDKs" href="/docs/integration/code-adaptions" />
 
